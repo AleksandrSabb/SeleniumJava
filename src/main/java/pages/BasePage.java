@@ -21,6 +21,8 @@ public class BasePage {
     WebElement signinLink;
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
+    @FindBy(xpath = "//a[@data-testid='miniBagIcon']")
+    WebElement cartButton;
 
 
     public BasePage(WebDriver driver) {
@@ -49,6 +51,8 @@ public class BasePage {
         singIn.enterPass();
         singIn.clickSignIn();
     }
-
+public void openCart(){
+        cartButton.click();
+}
 
 }

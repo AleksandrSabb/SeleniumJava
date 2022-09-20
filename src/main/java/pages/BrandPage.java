@@ -23,6 +23,8 @@ public class BrandPage extends BasePage {
     WebElement sortDropdown;
     @FindBy(xpath = "//li[@id='plp_web_sort_price_low_to_high']")
     WebElement sortPriceLtHButton;
+    @FindBy(xpath = "//article[@data-auto-id='productTile']")
+    WebElement firstProductOnPage;
 
     public BrandPage(WebDriver driver) {
         super(driver);
@@ -104,5 +106,11 @@ public class BrandPage extends BasePage {
 
         }
         return resoult;
+    }
+    public void clickOnProduct() throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(firstProductOnPage));
+        firstProductOnPage.click();
+        Thread.sleep(20000);
     }
 }

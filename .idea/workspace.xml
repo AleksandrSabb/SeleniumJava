@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="амазон не могу пройти капчу">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pages/SearchPage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" afterDir="false" />
+    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 4 теста ок">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pages/Cart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/MyStepdefs.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/openMainPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/test.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,15 +60,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Filter by colour" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: Add to cart" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
       <option name="GLUE" value="StepsDef" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="Final" />
-      <option name="NAME_FILTER" value="^Filter by colour$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Filter by colour$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Filter by colour" />
+      <option name="NAME_FILTER" value="^Add to cart$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Add to cart$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Add to cart" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -137,10 +134,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RunnerTests" />
-        <item itemvalue="Cucumber Java.Scenario: Filter by price" />
+        <item itemvalue="Cucumber Java.Scenario: Add to cart" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Cucumber Java.Scenario: Filter by price" />
         <item itemvalue="JUnit.steps.trsy" />
-        <item itemvalue="Cucumber Java.Scenario: Filter by colour" />
       </list>
     </recent_temporary>
   </component>
@@ -167,7 +164,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663517390719</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="asos 4 теста ок">
+      <created>1663661038941</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1663661038941</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -184,6 +188,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="11" />
     <MESSAGE value="амазон не могу пройти капчу" />
-    <option name="LAST_COMMIT_MESSAGE" value="амазон не могу пройти капчу" />
+    <MESSAGE value="asos 4 теста ок" />
+    <option name="LAST_COMMIT_MESSAGE" value="asos 4 теста ок" />
   </component>
 </project>

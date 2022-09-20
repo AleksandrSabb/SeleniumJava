@@ -9,10 +9,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import pages.BasePage;
-import pages.BrandPage;
-import pages.SearchPage;
-import pages.SingIn;
+import pages.*;
 
 import java.util.NoSuchElementException;
 
@@ -22,6 +19,8 @@ public class steps {
     private SingIn singIn;
     private SearchPage searchPage;
     private BrandPage brandPage;
+    private ProductPage productPage;
+    private Cart cart;
     @Given("Page is opened")
     public void pageIsOpened() {
         driver = WebDriverManager.chromedriver().create();
@@ -112,5 +111,41 @@ public class steps {
     public void priseOfProductIsLowerOrEqualToTheNextProduct() {
         brandPage = new BrandPage(driver);
         Assert.assertTrue(brandPage.sortByPriceLtHcheck());
+    }
+
+    @When("I click on product")
+    public void iClickOnProduct() throws InterruptedException {
+        brandPage = new BrandPage(driver);
+        brandPage.clickOnProduct();
+    }
+
+    @And("I select size")
+    public void iSelectSize()  {
+
+        productPage = new ProductPage(driver);
+        productPage.selectSize("Any");
+        productPage.dumpName();
+    }
+
+    @And("I Click add to Add to bag")
+    public void iClickAddToAddToBag() throws InterruptedException {
+        productPage = new ProductPage(driver);
+        productPage.addToBag();
+    }
+
+    @Then("Product is placed to my cart")
+    public void productIsPlacedToMyCart() throws InterruptedException {
+        basePage = new BasePage(driver);
+        basePage.openCart();
+        cart = new Cart(driver);
+        Thread.sleep(10000);
+        Assert.assertEquals(cart.getName(),productPage.returnName());
+    }
+
+    @Given("Product page is opened")
+    public void productPageIsOpened() throws InterruptedException {
+        driver = WebDriverManager.edgedriver().create();
+        driver.get("https://www.asos.com/nike-golf/nike-golf-air-max-90-shoes-in-blue-and-grey/prd/202358639?colourWayId=202358659&cid=4766");
+        Thread.sleep(20000);
     }
 }
