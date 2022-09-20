@@ -126,6 +126,7 @@ public class steps {
         productPage = new ProductPage(driver);
         productPage.selectSize("Any");
         productPage.dumpName();
+        productPage.dumpPrice();
     }
 
     @And("I Click add to Add to bag")
@@ -153,5 +154,19 @@ public class steps {
     public void productPageIsOpened()  {
         driver = WebDriverManager.chromedriver().create();
         driver.get("https://www.asos.com/nike-golf/nike-golf-air-max-90-shoes-in-blue-and-grey/prd/202358639?colourWayId=202358659&cid=4766");
+    }
+
+    @Given("Sales product page opened")
+    public void salesProductPageOpened() {
+        driver = WebDriverManager.chromedriver().create();
+        driver.get("https://www.asos.com/nike/nike-club-zip-up-hoodie-in-black/prd/202400906?clr=black&colourWayId=202400907&cid=28239");
+
+    }
+
+    @Then("Price in cart equals to product sales price")
+    public void priceInCartEqualsToProductSalesPrice() throws InterruptedException {
+        cart = new Cart(driver);
+        Thread.sleep(10000);
+        Assert.assertEquals(cart.getPrice(),productPage.returnPrice());
     }
 }

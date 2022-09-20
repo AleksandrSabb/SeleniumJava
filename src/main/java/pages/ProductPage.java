@@ -40,11 +40,11 @@ public class ProductPage extends BasePage {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         selectSizeDropdown.click();
         wait.until(ExpectedConditions.visibilityOf(sizeValues));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[3]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[4]")));
         if (Objects.equals(size, "Any")) {
 
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[3]")));
-            driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[3]")).click();
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[4]")));
+            driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[4]")).click();
         } else
             driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]")).click();
 
@@ -57,7 +57,7 @@ public class ProductPage extends BasePage {
     }
 
     public void dumpName() {
-        try (FileWriter writer = new FileWriter("productName", false)) {
+        try (FileWriter writer = new FileWriter("productName.txt", false)) {
             String text = productName.getText();
             writer.write(text);
             writer.flush();
@@ -69,7 +69,7 @@ public class ProductPage extends BasePage {
     }
 
     public void dumpPrice() {
-        try (FileWriter writer = new FileWriter("productPrice", false)) {
+        try (FileWriter writer = new FileWriter("productPrice.txt", false)) {
             String text = productPrice.getText();
             writer.write(text);
             writer.flush();
@@ -78,6 +78,19 @@ public class ProductPage extends BasePage {
         } catch (RuntimeException e) {
             throw new RuntimeException(e);
         }
+    }
+    public String returnPrice() {
+        try (FileReader reader = new FileReader("productPrice.txt")) {
+            StringBuilder resolt = new StringBuilder();
+            int c;
+            while ((c = reader.read()) != -1) {
+                resolt.append((char) c);
+            }
+            return resolt.toString();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 
     public String returnName() {

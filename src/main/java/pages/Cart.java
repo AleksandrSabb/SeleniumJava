@@ -11,7 +11,7 @@ import java.time.Duration;
 public class Cart extends BasePage{
     @FindBy(xpath = "//p[@class='bag-item-name']/a")
     WebElement productName;
-    @FindBy(xpath = "//span[contains (@class,'bag-item-price bag-item-price--current')]")
+    @FindBy(xpath = "//span[@class='bag-subtotal-price']")
     WebElement productPrice;
 
     public Cart(WebDriver driver) {
@@ -23,6 +23,9 @@ public class Cart extends BasePage{
         return productName.getText();
     }
     public String getPrice(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(productPrice));
         return productPrice.getText();
+
     }
 }

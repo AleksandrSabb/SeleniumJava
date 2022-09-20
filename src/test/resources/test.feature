@@ -25,8 +25,14 @@ Feature: Test ASOS
      #   When I select sort by price from low to high
       #  Then Prise of product is lower or equal to the next product
 
-        Scenario: Add to cart
-          Given Product page is opened
-          When I select size
-          And I Click add to Add to bag
-          Then Product is placed to my cart
+   #     Scenario: Add to cart
+    #      Given Product page is opened
+   #       When I select size
+   #       And I Click add to Add to bag
+    #      Then Product is placed to my cart
+
+Scenario: Check discount prise in cart
+  Given Sales product page opened
+  When I select size
+  And I Click add to Add to bag
+  Then Price in cart equals to product sales price
