@@ -1,6 +1,7 @@
 package pages;
 
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,37 +10,45 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.security.Key;
 import java.time.Duration;
 
 public class BasePage {
     WebDriver driver;
-    @FindBy(xpath = "//div [@id = 'navbar']")
-    WebElement header;
-    @FindBy(xpath = "//a [@class = 'nav-a nav-a-2   nav-progressive-attribute'][1]")
-    WebElement helloSignIn;
-    @FindBy(xpath = "//span [@class= 'nav-action-inner']")
-    WebElement singInButton;
+    @FindBy(xpath = "//li[@class='_3Wo6fpk mD8oZFx']")
+    WebElement myAccountDropdown;
+    @FindBy(xpath = "//a[@data-testid='signin-link']")
+    WebElement signinLink;
+    @FindBy(xpath = "//input[@type='search']")
+    WebElement searchField;
+
 
     public BasePage(WebDriver driver) {
-        driver.manage().window().fullscreen();
         this.driver = driver;
-
         PageFactory.initElements(driver, this);
     }
 
-    public void navigateMouseTo(WebElement element) {
-        Actions action = new Actions(driver);
-        action.moveToElement(element).build().perform();
-    }
-    public void navigateMouseToSignIn() {
-        helloSignIn.click();
+    public void navigateToMyAccount() {
+        Actions actions = new Actions(driver);
+        actions.moveToElement(myAccountDropdown).build().perform();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(signinLink));
+        signinLink.click();
     }
 
-    public SingIn pressLogButton() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(helloSignIn));
-        navigateMouseTo(helloSignIn);
-        singInButton.click();
-        return (SingIn) driver;
+    public void clickOnSignInLink() {
+
     }
+
+    public void Login() {
+        driver.get("https://www.asos.com/");
+        BasePage basePage = new BasePage(driver);
+        basePage.navigateToMyAccount();
+        SingIn singIn = new SingIn(driver);
+        singIn.enterEmail();
+        singIn.enterPass();
+        singIn.clickSignIn();
+    }
+
+
 }

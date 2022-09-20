@@ -5,7 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 
 public class SingIn extends BasePage {
@@ -13,34 +12,26 @@ public class SingIn extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//input [@type= 'email']")
+    @FindBy(xpath = "//input[@name= 'Username']")
     WebElement emailField;
-    @FindBy(xpath = "//span[@class= 'a-button-inner']//*[@id = 'continue']")
-    WebElement continueButton;
-    @FindBy(xpath = "//input [@type= 'password']")
+    @FindBy(xpath = "//input[@name= 'Password']")
     WebElement passwordField;
-    @FindBy(xpath = "//span[@class= 'a-button-inner']//*[@id = 'signInSubmit']")
-    WebElement signInBut;
+    @FindBy(xpath = "//input[@id='signin']")
+    WebElement signInButton;
 
     public void enterEmail() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(emailField));
        String email = "mymailbox099@meta.ua";
         emailField.sendKeys(email);
     }
-
-    public void clickContinue() {
-        continueButton.click();
-    }
-
+    
     public void enterPass() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(passwordField));
-       String pass = "asd5329367aaa";
+       String pass = "asd5329367";
         passwordField.sendKeys(pass);
     }
 
     public void clickSignIn() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(signInBut));
-        signInBut.click();
+        signInButton.click();
     }
 }

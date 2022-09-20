@@ -4,18 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="11">
-      <change afterPath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/StepsDef/MyStepdefs.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/StepsDef/openMainPage.java" afterDir="false" />
+    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="амазон не могу пройти капчу">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/pages/SearchPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/org/example/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/stepdefinitions/DefenitionSteps.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/smoke.feature" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/test.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/runner/RunnerTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/runner/RunnerTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/MyStepdefs.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/openMainPage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/test.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,14 +41,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/SouSous/IdeaProjects/Final/src/test/java/StepsDef"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/SouSous/IdeaProjects/Final/src/test/java/StepsDef&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="JUnit.RunnerTests">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.example.App" />
@@ -63,15 +63,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Test login with valid creads" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: Filter by colour" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
       <option name="GLUE" value="StepsDef" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="Final" />
-      <option name="NAME_FILTER" value="^Test login with valid creads$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Test login with valid creads$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Test login with valid creads" />
+      <option name="NAME_FILTER" value="^Filter by colour$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Filter by colour$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Filter by colour" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -83,15 +83,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: test google" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: Filter by price" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
       <option name="GLUE" value="StepsDef" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="Final" />
-      <option name="NAME_FILTER" value="^test google$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^test google$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: test google" />
+      <option name="NAME_FILTER" value="^Filter by price$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Filter by price$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Filter by price" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -118,12 +118,29 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="steps.trsy" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Final" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="StepsDef.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="StepsDef" />
+      <option name="MAIN_CLASS_NAME" value="StepsDef.steps" />
+      <option name="METHOD_NAME" value="trsy" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RunnerTests" />
-        <item itemvalue="Cucumber Java.Scenario: Test login with valid creads" />
+        <item itemvalue="Cucumber Java.Scenario: Filter by price" />
         <item itemvalue="Application.App" />
-        <item itemvalue="Cucumber Java.Scenario: test google" />
+        <item itemvalue="JUnit.steps.trsy" />
+        <item itemvalue="Cucumber Java.Scenario: Filter by colour" />
       </list>
     </recent_temporary>
   </component>
@@ -143,7 +160,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663494456206</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="амазон не могу пройти капчу">
+      <created>1663517390719</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1663517390719</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -159,6 +183,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="11" />
-    <option name="LAST_COMMIT_MESSAGE" value="11" />
+    <MESSAGE value="амазон не могу пройти капчу" />
+    <option name="LAST_COMMIT_MESSAGE" value="амазон не могу пройти капчу" />
   </component>
 </project>
