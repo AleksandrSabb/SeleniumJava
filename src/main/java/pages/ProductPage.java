@@ -3,17 +3,15 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
+import org.openqa.selenium.TimeoutException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
 import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 
 public class ProductPage extends BasePage {
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -37,21 +35,26 @@ public class ProductPage extends BasePage {
     }
 
     public void selectSize(String size) {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         selectSizeDropdown.click();
         wait.until(ExpectedConditions.visibilityOf(sizeValues));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[4]")));
-        if (Objects.equals(size, "Any")) {
 
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[4]")));
-            driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[4]")).click();
-        } else
+        if (Objects.equals(size, "Any")) {
+            int clickAble = 3;
+            for (int i = 2; i < clickAble; i++) {
+               try {
+                   wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")));
+                   driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")).click();
+               }catch (TimeoutException e){clickAble++;}
+                 }
+        }else
             driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]")).click();
+
+
 
     }
 
-    public void addToBag() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+    public void addToBag() {
+        //don't work on automation soft
         addButton.click();
         wait.until(ExpectedConditions.visibilityOf(cartAddConfirm));
     }
@@ -81,12 +84,12 @@ public class ProductPage extends BasePage {
     }
     public String returnPrice() {
         try (FileReader reader = new FileReader("productPrice.txt")) {
-            StringBuilder resolt = new StringBuilder();
+            StringBuilder result = new StringBuilder();
             int c;
             while ((c = reader.read()) != -1) {
-                resolt.append((char) c);
+                result.append((char) c);
             }
-            return resolt.toString();
+            return result.toString();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
@@ -95,12 +98,12 @@ public class ProductPage extends BasePage {
 
     public String returnName() {
         try (FileReader reader = new FileReader("productName.txt")) {
-            StringBuilder resolt = new StringBuilder();
+            StringBuilder result = new StringBuilder();
             int c;
             while ((c = reader.read()) != -1) {
-                resolt.append((char) c);
+                result.append((char) c);
             }
-            return resolt.toString();
+            return result.toString();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

@@ -1,7 +1,5 @@
 package pages;
 
-
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -9,8 +7,6 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.security.Key;
 import java.time.Duration;
 
 public class BasePage {
@@ -21,10 +17,14 @@ public class BasePage {
     WebElement signinLink;
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
-    @FindBy(xpath = "//div[@id='miniBagDropdown']//*")
+    @FindBy(xpath = "//div[@id='miniBagDropdown']")
     WebElement cartButton;
     @FindBy(xpath = "//a[@data-testid='savedItemsIcon']")
     WebElement wishListButton;
+    @FindBy(xpath = "//a[@data-test-id='bag-link']")
+    WebElement toCartButton;
+    @FindBy(xpath = "//div[@class='bag-item-descriptions']")
+    WebElement productFrame;
 
 
     public BasePage(WebDriver driver) {
@@ -35,13 +35,12 @@ public class BasePage {
     public void navigateToMyAccount() {
         Actions actions = new Actions(driver);
         actions.moveToElement(myAccountDropdown).build().perform();
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(signinLink));
-        signinLink.click();
     }
 
     public void clickOnSignInLink() {
-
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(signinLink));
+        signinLink.click();
     }
 
     public void Login() {
@@ -49,18 +48,25 @@ public class BasePage {
         BasePage basePage = new BasePage(driver);
         basePage.navigateToMyAccount();
         SingIn singIn = new SingIn(driver);
-        singIn.enterEmail();
-        singIn.enterPass();
+        singIn.enterEmail("True value");
+        singIn.enterPass("True value");
         singIn.clickSignIn();
     }
-public void openCart(){
+
+    public void openCart() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(cartButton));
-        cartButton.click();
-        driver.get("https://www.asos.com/bag?ctaref=mini+bag");
-}
-public void openWishList(){
+        Actions actions = new Actions(driver);
+        actions.scrollByAmount(0, -500).build().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(cartButton));
+        actions.moveToElement(cartButton).build().perform();
+        wait.until(ExpectedConditions.elementToBeClickable(toCartButton));
+        toCartButton.click();
+        wait.until(ExpectedConditions.visibilityOf(productFrame));
+        //driver.get("https://www.asos.com/bag?ctaref=mini+bag"); if cart is empty
+    }
+
+    public void openWishList() {
         wishListButton.click();
-}
+    }
 
 }

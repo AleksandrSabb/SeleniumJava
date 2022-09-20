@@ -8,13 +8,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
-import java.util.List;
 
 public class BrandPage extends BasePage {
 
-    String colour = "Blue";
     @FindBy(xpath = "//div[contains (text(), 'Colour')]")
     WebElement colourDropDown;
     @FindBy(xpath = "//div[@class = 'oBN6c3V EWBhZgg']")
@@ -23,14 +20,14 @@ public class BrandPage extends BasePage {
     WebElement sortDropdown;
     @FindBy(xpath = "//li[@id='plp_web_sort_price_low_to_high']")
     WebElement sortPriceLtHButton;
-    @FindBy(xpath = "//article[@data-auto-id='productTile']")
+    @FindBy(xpath = "//article[@data-auto-id]")
     WebElement firstProductOnPage;
 
     public BrandPage(WebDriver driver) {
         super(driver);
     }
 
-    public void setColourAs() throws InterruptedException {
+    public void setColourAs(String colour) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(colourDropDown));
         colourDropDown.click();
@@ -38,38 +35,27 @@ public class BrandPage extends BasePage {
         WebElement color = colorSelectPane.findElement(By.xpath("//div[contains (text(), '" + colour + "')]"));
         wait.until(ExpectedConditions.visibilityOf(color));
         color.click();
+        Thread.sleep(2000); //need for load
     }
 
-    public boolean colorAsSet() {
+    public boolean colorAsSet(String colour) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
   /*    for get all elements
         WebElement productsFromPage = driver.findElement(By.xpath("//article[@data-auto-id]")); */
 
-        boolean resolt = true;
-        if (resolt == true)
+        boolean result = true;
+        if (result)
             for (int i = 1; i < 5; i++) {
-                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]"))));
+                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]"))));
                 driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")).click();
-                resolt = driver.findElement(By.xpath("//span[@class = 'product-colour']"))
+                result = driver.findElement(By.xpath("//span[@class = 'product-colour']"))
                         .getText().toLowerCase().contains(colour.toLowerCase());
                 driver.navigate().back();
             }
-        return resolt;
+        return result;
 
     }
 
-    public void searchRealPrise() {
-        String prise = "null;";
-        for (int i = 1; i < 5; i++) {
-            if (driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[@data-auto-id='productTileSaleAmount']")).isDisplayed()) {
-                prise = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[@data-auto-id='productTileSaleAmount']"))
-                        .getText();
-                prise = prise.substring(1, prise.length() - 1);
-            } else prise = "0";
-            System.out.println(prise);
-        }
-
-    }
 
     public void sortByPriceLtH()  {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -82,10 +68,9 @@ public class BrandPage extends BasePage {
     }
 
     public boolean sortByPriceLtHcheck() {
-       boolean resoult = true;
+       boolean result = true;
         for (int i = 1; i < 5; i++) {
-
-            if (resoult == true) {
+            if (result==true) {
                 String valueOne;
                 String valueTwo;
                 try {
@@ -100,12 +85,12 @@ public class BrandPage extends BasePage {
                 }
                 valueOne = valueOne.substring(1).replace(".", "");
                 valueTwo = valueTwo.substring(1).replace(".", "");
-                resoult = (Integer.parseInt(valueOne) <= Integer.parseInt(valueTwo));
-                System.out.println(resoult);
-            } else resoult = false;
+                result = (Integer.parseInt(valueOne) <= Integer.parseInt(valueTwo));
+                System.out.println(result);
+            } else result = false;
 
         }
-        return resoult;
+        return result;
     }
     public void clickOnProduct() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

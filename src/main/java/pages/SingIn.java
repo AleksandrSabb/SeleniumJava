@@ -19,15 +19,13 @@ public class SingIn extends BasePage {
     @FindBy(xpath = "//input[@id='signin']")
     WebElement signInButton;
 
-    public void enterEmail() {
+    public void enterEmail(String email) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(emailField));
-       String email = "mymailbox099@meta.ua";
         emailField.sendKeys(email);
     }
     
-    public void enterPass() {
-       String pass = "asd5329367";
+    public void enterPass(String pass) {
         passwordField.sendKeys(pass);
     }
 

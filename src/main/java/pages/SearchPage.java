@@ -6,33 +6,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SearchPage extends BasePage{
-    private WebDriver driver;
-    public String searchItem = "Nike";
-    @FindBy(xpath = "//a[@data-testid='signin-link']")
-    WebElement signinLink;
+
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
     @FindBy(xpath = "//div[@id='search-term-banner']//*[2]")
-    WebElement resoultTitle;
+    WebElement resultTitle;
 
     public SearchPage(WebDriver driver) {
         super(driver);
     }
-    public void search() {
+    public void search(String text) {
         searchField.click();
-        searchField.sendKeys(searchItem);
+        searchField.sendKeys(text);
     }
     public void searchPressEnter(){
         searchField.sendKeys( Keys.ENTER);
     }
-    public String getResoultTitle(){
-        String resoult = resoultTitle.getText();
-        int size = resoult.length();
-        resoult = resoult.substring(1,size-1).toLowerCase();
-        return resoult;
+    public String getResultTitle(){
+        String result = resultTitle.getText();
+        int size = result.length();
+        result = result.substring(1,size-1).toLowerCase();
+        return result;
     }
 
-    public String getSearchItem() {
-        return searchItem.toLowerCase();
+    public String getSearchItem(String text) {
+        return text.toLowerCase();
     }
 }

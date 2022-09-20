@@ -6,12 +6,9 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
-import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
-import java.util.NoSuchElementException;
 
 public class steps {
     private WebDriver driver;
@@ -28,7 +25,7 @@ public class steps {
         driver.get("https://www.asos.com/");
     }
 
-    @When("I navigate to profile icon & click on signIn link")
+    @When("I navigate to profile icon")
     public void iNavigateToProfileIconClickOnSignInLink() {
         basePage = new BasePage(driver);
         basePage.navigateToMyAccount();
@@ -40,16 +37,16 @@ public class steps {
         basePage.clickOnSignInLink();
     }
 
-    @And("I enter valid email")
-    public void iEnterValidEmail() {
+    @And("I enter valid email \\({string})")
+    public void iEnterValidEmail(String email) {
         singIn = new SingIn(driver);
-        singIn.enterEmail();
+        singIn.enterEmail(email);
     }
 
-    @And("I enter valid password")
-    public void iEnterValidPassword() {
+    @And("I enter valid password \\({string})")
+    public void iEnterValidPassword(String pass) {
         singIn = new SingIn(driver);
-        singIn.enterPass();
+        singIn.enterPass(pass);
     }
 
     @And("I click on signIn button")
@@ -63,10 +60,10 @@ public class steps {
     public void iSeeMainPage() {
         Assert.assertEquals("ASOS | Online Shopping for the Latest Clothes & Fashion", driver.getTitle());
     }
-    @When("I type text in search field")
-    public void iTypeTextInSearchField() {
+    @When("I type text \\({string})in search field")
+    public void iTypeTextInSearchField(String text) {
         searchPage = new SearchPage(driver);
-        searchPage.search();
+        searchPage.search(text);
     }
 
     @And("Press Enter")
@@ -75,10 +72,10 @@ public class steps {
         searchPage.searchPressEnter();
     }
 
-    @Then("I see resoult of my request")
-    public void iSeeResoultOfMyRequest() {
+    @Then("I see result of my request \\({string})")
+    public void iSeeResultOfMyRequest(String text) {
         searchPage = new SearchPage(driver);
-        Assert.assertEquals(searchPage.getSearchItem(),searchPage.getResoultTitle());
+        Assert.assertEquals(searchPage.getSearchItem(text),searchPage.getResultTitle());
     }
 
 
@@ -88,17 +85,16 @@ public class steps {
         driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
     }
 
-    @When("I set colour dropdown")
-    public void iSetColourDropdown() throws InterruptedException {
+    @When("I set colour dropdown \\({string})")
+    public void iSetColourDropdown(String colour) throws InterruptedException {
         brandPage = new BrandPage(driver);
-        brandPage.setColourAs();
-        Thread.sleep(1000);
+        brandPage.setColourAs(colour);
     }
 
-    @Then("I see only products with color i set")
-    public void iSeeOnlyProductsWithColorISet() {
+    @Then("I see only products with color \\({string})")
+    public void iSeeOnlyProductsWithColor(String colour) {
         brandPage = new BrandPage(driver);
-        Assert.assertTrue(brandPage.colorAsSet());
+        Assert.assertTrue(brandPage.colorAsSet(colour));
     }
 
     @When("I select sort by price from low to high")
@@ -120,11 +116,11 @@ public class steps {
         brandPage.clickOnProduct();
     }
 
-    @And("I select size")
-    public void iSelectSize()  {
+    @When("I select size\\({string})")
+    public void iSelectSize(String colour)  {
 
         productPage = new ProductPage(driver);
-        productPage.selectSize("Any");
+        productPage.selectSize(colour);
         productPage.dumpName();
         productPage.dumpPrice();
     }
@@ -143,10 +139,8 @@ public class steps {
     }
 
     @Then("Product is placed to my cart")
-    public void productIsPlacedToMyCart() throws InterruptedException {
-
+    public void productIsPlacedToMyCart()  {
         cart = new Cart(driver);
-        Thread.sleep(10000);
         Assert.assertEquals(cart.getName(),productPage.returnName());
     }
 
@@ -164,9 +158,9 @@ public class steps {
     }
 
     @Then("Price in cart equals to product sales price")
-    public void priceInCartEqualsToProductSalesPrice() throws InterruptedException {
+    public void priceInCartEqualsToProductSalesPrice()  {
         cart = new Cart(driver);
-        Thread.sleep(10000);
         Assert.assertEquals(cart.getPrice(),productPage.returnPrice());
     }
+
 }
