@@ -3,6 +3,10 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class Cart extends BasePage{
     @FindBy(xpath = "//p[@class='bag-item-name']/a")
@@ -14,6 +18,8 @@ public class Cart extends BasePage{
         super(driver);
     }
     public String getName(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(productName));
         return productName.getText();
     }
     public String getPrice(){

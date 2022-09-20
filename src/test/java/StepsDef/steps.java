@@ -21,6 +21,7 @@ public class steps {
     private BrandPage brandPage;
     private ProductPage productPage;
     private Cart cart;
+    private WishList wishList;
     @Given("Page is opened")
     public void pageIsOpened() {
         driver = WebDriverManager.chromedriver().create();
@@ -130,22 +131,27 @@ public class steps {
     @And("I Click add to Add to bag")
     public void iClickAddToAddToBag() throws InterruptedException {
         productPage = new ProductPage(driver);
-        productPage.addToBag();
+        //productPage.addToBag(); go around blocker
+        productPage.addToWishList();
+        basePage = new BasePage(driver);
+        basePage.openWishList();
+        wishList = new WishList(driver);
+        wishList.addToCart();
+        basePage = new BasePage(driver);
+        basePage.openCart();
     }
 
     @Then("Product is placed to my cart")
     public void productIsPlacedToMyCart() throws InterruptedException {
-        basePage = new BasePage(driver);
-        basePage.openCart();
+
         cart = new Cart(driver);
         Thread.sleep(10000);
         Assert.assertEquals(cart.getName(),productPage.returnName());
     }
 
     @Given("Product page is opened")
-    public void productPageIsOpened() throws InterruptedException {
-        driver = WebDriverManager.edgedriver().create();
+    public void productPageIsOpened()  {
+        driver = WebDriverManager.chromedriver().create();
         driver.get("https://www.asos.com/nike-golf/nike-golf-air-max-90-shoes-in-blue-and-grey/prd/202358639?colourWayId=202358659&cid=4766");
-        Thread.sleep(20000);
     }
 }

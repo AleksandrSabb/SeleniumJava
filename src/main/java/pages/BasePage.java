@@ -21,8 +21,10 @@ public class BasePage {
     WebElement signinLink;
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
-    @FindBy(xpath = "//a[@data-testid='miniBagIcon']")
+    @FindBy(xpath = "//div[@id='miniBagDropdown']//*")
     WebElement cartButton;
+    @FindBy(xpath = "//a[@data-testid='savedItemsIcon']")
+    WebElement wishListButton;
 
 
     public BasePage(WebDriver driver) {
@@ -52,7 +54,13 @@ public class BasePage {
         singIn.clickSignIn();
     }
 public void openCart(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(cartButton));
         cartButton.click();
+        driver.get("https://www.asos.com/bag?ctaref=mini+bag");
+}
+public void openWishList(){
+        wishListButton.click();
 }
 
 }

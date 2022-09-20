@@ -29,31 +29,34 @@ public class ProductPage extends BasePage {
     WebElement productPrice;
     @FindBy(xpath = "//div[@data-test-id='data-test-id' ]")
     WebElement cartAddConfirm;
+    @FindBy(xpath = "//button[@aria-label='Save for later' and @class='PHcSE kFfQP']")
+    WebElement addToWishListButton;
 
     public ProductPage(WebDriver driver) {
         super(driver);
     }
 
-    public void selectSize(String size)  {
+    public void selectSize(String size) {
         driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
         selectSizeDropdown.click();
         wait.until(ExpectedConditions.visibilityOf(sizeValues));
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[2]")));
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[3]")));
         if (Objects.equals(size, "Any")) {
 
-            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[2]")));
-            driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[2]")).click();
-        }else
+            wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*[3]")));
+            driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[3]")).click();
+        } else
             driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]")).click();
 
     }
 
     public void addToBag() throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(2,TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         addButton.click();
         wait.until(ExpectedConditions.visibilityOf(cartAddConfirm));
     }
-    public void dumpName(){
+
+    public void dumpName() {
         try (FileWriter writer = new FileWriter("productName", false)) {
             String text = productName.getText();
             writer.write(text);
@@ -64,7 +67,8 @@ public class ProductPage extends BasePage {
             throw new RuntimeException(e);
         }
     }
-    public void dumpPrice(){
+
+    public void dumpPrice() {
         try (FileWriter writer = new FileWriter("productPrice", false)) {
             String text = productPrice.getText();
             writer.write(text);
@@ -75,8 +79,9 @@ public class ProductPage extends BasePage {
             throw new RuntimeException(e);
         }
     }
-    public String returnName(){
-        try (FileReader reader = new FileReader("productName")) {
+
+    public String returnName() {
+        try (FileReader reader = new FileReader("productName.txt")) {
             StringBuilder resolt = new StringBuilder();
             int c;
             while ((c = reader.read()) != -1) {
@@ -87,5 +92,11 @@ public class ProductPage extends BasePage {
             System.out.println(ex.getMessage());
         }
         return null;
+    }
+
+    public void addToWishList() throws InterruptedException {
+        wait.until(ExpectedConditions.visibilityOf(addToWishListButton));
+        addToWishListButton.click();
+        Thread.sleep(3000);
     }
 }
