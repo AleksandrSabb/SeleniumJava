@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 
 import java.util.Set;
@@ -25,7 +26,9 @@ public class steps {
 
     @Given("Page is opened")
     public void pageIsOpened() {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/");
     }
 
@@ -88,7 +91,9 @@ public class steps {
 
     @Given("Brand page is opened")
     public void brandPageIsOpened() {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
     }
 
@@ -156,13 +161,17 @@ public class steps {
 
     @Given("Product page is opened")
     public void productPageIsOpened() {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/nike-golf/nike-golf-air-max-90-shoes-in-blue-and-grey/prd/202358639?colourWayId=202358659&cid=4766");
     }
 
     @Given("Sales product page opened")
     public void salesProductPageOpened() {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/nike/nike-club-zip-up-hoodie-in-black/prd/202400906?clr=black&colourWayId=202400907&cid=28239");
 
     }
@@ -193,7 +202,9 @@ public class steps {
 
     @Given("wishlist page with \\({int}) products in list")
     public void wishlistPageWithProductsInList(int count) throws InterruptedException {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
         for (int i = 0; i < count; i++) {
             brandPage = new BrandPage(driver);
@@ -222,7 +233,9 @@ public class steps {
 
     @Given("User not login")
     public void userNotLogin() {
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("start-maximized");
+        driver = WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
     }
 
