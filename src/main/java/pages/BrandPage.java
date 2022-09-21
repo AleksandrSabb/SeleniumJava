@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
+import java.util.List;
 
 public class BrandPage extends BasePage {
 
@@ -96,6 +97,22 @@ public class BrandPage extends BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(firstProductOnPage));
         firstProductOnPage.click();
-        Thread.sleep(20000);
+        Thread.sleep(2000);
+    }
+    public void openRandomProductFromBrandPage(){
+        List<WebElement> countOnPage = driver.findElements(By.xpath("//article[@data-auto-id='productTile']"));
+        int random = 1+(int) (Math.random()*countOnPage.size());
+        WebElement randomProduct = driver.findElement(By.xpath("//article[@data-auto-id='productTile']["+random+"]"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        try {
+            wait.until(ExpectedConditions.visibilityOf(randomProduct));
+            randomProduct.click();
+        } catch (NoSuchElementException e) {
+            random = (int) (Math.random()*(countOnPage.size()+1));
+            WebElement randomProduct1 = driver.findElement(By.xpath("//article[@data-auto-id='productTile']["+random+"]"));
+            wait.until(ExpectedConditions.visibilityOf(randomProduct1));
+            randomProduct1.click();
+        }
+
     }
 }

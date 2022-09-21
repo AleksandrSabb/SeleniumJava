@@ -113,6 +113,6 @@ public class ProductPage extends BasePage {
     public void addToWishList() throws InterruptedException {
         wait.until(ExpectedConditions.visibilityOf(addToWishListButton));
         addToWishListButton.click();
-        Thread.sleep(3000);
+        Thread.sleep(3000); //need for animation
     }
 }

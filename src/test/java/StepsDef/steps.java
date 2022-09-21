@@ -163,4 +163,47 @@ public class steps {
         Assert.assertEquals(cart.getPrice(),productPage.returnPrice());
     }
 
+    @When("I press heart")
+    public void iPressHeart() throws InterruptedException {
+        productPage = new ProductPage(driver);
+        productPage.addToWishList();
+        productPage.dumpName();
+    }
+
+    @Then("Product add to my wishlist")
+    public void productAddToMyWishlist() {
+        basePage = new BasePage(driver);
+        basePage.openWishList();
+        productPage = new ProductPage(driver);
+        wishList = new WishList(driver);
+        Assert.assertEquals(productPage.returnName(),wishList.returnProductTitle());
+    }
+
+    @Given("wishlist page with \\({int}) products in list")
+    public void wishlistPageWithProductsInList(int count) throws InterruptedException {
+        driver = WebDriverManager.chromedriver().create();
+        driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
+        for (int i = 0; i < count; i++) {
+            brandPage = new BrandPage(driver);
+            brandPage.openRandomProductFromBrandPage();
+            productPage = new ProductPage(driver);
+            productPage.addToWishList();
+            driver.navigate().back();
+        }
+        basePage = new BasePage(driver);
+        basePage.openWishList();
+    }
+
+    @When("I click remove button on product no\\({int})")
+    public void iClickRemoveButtonOnProductNo(int productNomber) throws InterruptedException {
+        wishList = new WishList(driver);
+        wishList.dumpProductNameFromList(productNomber);
+        wishList.removeFromList(productNomber);
+    }
+
+    @Then("product removed from wishlist")
+    public void productRemovedFromWishlist() {
+        wishList = new WishList(driver);
+        Assert.assertFalse(wishList.itemOnPage());
+    }
 }

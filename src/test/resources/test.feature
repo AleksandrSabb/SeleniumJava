@@ -39,3 +39,13 @@ Feature: Test ASOS
     # Any -> choose first available
     And I Click add to Add to bag
     Then Price in cart equals to product sales price
+
+  Scenario: Add product to wishlist
+    Given Product page is opened
+    When I press heart
+    Then Product add to my wishlist
+
+  Scenario: Delete item from wishlist
+    Given wishlist page with (2) products in list
+    When I click remove button on product no(1)
+    Then product removed from wishlist
