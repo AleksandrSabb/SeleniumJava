@@ -36,6 +36,8 @@ public class BrandPage extends BasePage {
         WebElement color = colorSelectPane.findElement(By.xpath("//div[contains (text(), '" + colour + "')]"));
         wait.until(ExpectedConditions.visibilityOf(color));
         color.click();
+        wait.until(ExpectedConditions.elementToBeClickable(colourDropDown));
+        colourDropDown.click();
         Thread.sleep(2000); //need for load
     }
 
@@ -47,7 +49,7 @@ public class BrandPage extends BasePage {
         boolean result = true;
         if (result)
             for (int i = 1; i < 5; i++) {
-                wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]"))));
+                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]"))));
                 driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")).click();
                 result = driver.findElement(By.xpath("//span[@class = 'product-colour']"))
                         .getText().toLowerCase().contains(colour.toLowerCase());
@@ -58,14 +60,13 @@ public class BrandPage extends BasePage {
     }
 
 
-    public void sortByPriceLtH()  {
+    public void sortByPriceLtH() throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(sortDropdown));
         sortDropdown.click();
         wait.until(ExpectedConditions.visibilityOf(sortPriceLtHButton));
         sortPriceLtHButton.click();
-        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//article[@data-auto-id='productTile']"))));
-
+        Thread.sleep(3000); //need for wait loading
     }
 
     public boolean sortByPriceLtHcheck() {
@@ -74,15 +75,16 @@ public class BrandPage extends BasePage {
             if (result==true) {
                 String valueOne;
                 String valueTwo;
+                int next = i+1;
                 try {
                     valueOne = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[@data-auto-id]")).getText();
                 } catch (NoSuchElementException e) {
                     valueOne = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[1]")).getText();
                 }
                 try {
-                    valueTwo = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + (i + 1) + "]//span[@data-auto-id]")).getText();
+                    valueTwo = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + next + "]//span[@data-auto-id]")).getText();
                 } catch (NoSuchElementException e) {
-                    valueTwo = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + (i + 1) + "]//span//span[1]")).getText();
+                    valueTwo = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + next + "]//span//span[1]")).getText();
                 }
                 valueOne = valueOne.substring(1).replace(".", "");
                 valueTwo = valueTwo.substring(1).replace(".", "");

@@ -9,6 +9,8 @@ import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
 import pages.*;
 
+import java.util.Set;
+
 
 public class steps {
     private WebDriver driver;
@@ -19,6 +21,8 @@ public class steps {
     private ProductPage productPage;
     private Cart cart;
     private WishList wishList;
+    private OurAppsPage ourAppsPage;
+
     @Given("Page is opened")
     public void pageIsOpened() {
         driver = WebDriverManager.chromedriver().create();
@@ -59,7 +63,9 @@ public class steps {
     @Then("I see main page")
     public void iSeeMainPage() {
         Assert.assertEquals("ASOS | Online Shopping for the Latest Clothes & Fashion", driver.getTitle());
+        driver.quit();
     }
+
     @When("I type text \\({string})in search field")
     public void iTypeTextInSearchField(String text) {
         searchPage = new SearchPage(driver);
@@ -75,7 +81,8 @@ public class steps {
     @Then("I see result of my request \\({string})")
     public void iSeeResultOfMyRequest(String text) {
         searchPage = new SearchPage(driver);
-        Assert.assertEquals(searchPage.getSearchItem(text),searchPage.getResultTitle());
+        Assert.assertEquals(searchPage.getSearchItem(text), searchPage.getResultTitle());
+        driver.quit();
     }
 
 
@@ -95,10 +102,11 @@ public class steps {
     public void iSeeOnlyProductsWithColor(String colour) {
         brandPage = new BrandPage(driver);
         Assert.assertTrue(brandPage.colorAsSet(colour));
+        driver.quit();
     }
 
     @When("I select sort by price from low to high")
-    public void iSelectSortByPriceFromLowToHigh() {
+    public void iSelectSortByPriceFromLowToHigh() throws InterruptedException {
         brandPage = new BrandPage(driver);
         brandPage.sortByPriceLtH();
 
@@ -108,6 +116,7 @@ public class steps {
     public void priseOfProductIsLowerOrEqualToTheNextProduct() {
         brandPage = new BrandPage(driver);
         Assert.assertTrue(brandPage.sortByPriceLtHcheck());
+        driver.quit();
     }
 
     @When("I click on product")
@@ -117,10 +126,10 @@ public class steps {
     }
 
     @When("I select size\\({string})")
-    public void iSelectSize(String colour)  {
+    public void iSelectSize(String size) {
 
         productPage = new ProductPage(driver);
-        productPage.selectSize(colour);
+        productPage.selectSize(size);
         productPage.dumpName();
         productPage.dumpPrice();
     }
@@ -139,13 +148,14 @@ public class steps {
     }
 
     @Then("Product is placed to my cart")
-    public void productIsPlacedToMyCart()  {
+    public void productIsPlacedToMyCart() {
         cart = new Cart(driver);
-        Assert.assertEquals(cart.getName(),productPage.returnName());
+        Assert.assertEquals(cart.getName(), productPage.returnName());
+        driver.quit();
     }
 
     @Given("Product page is opened")
-    public void productPageIsOpened()  {
+    public void productPageIsOpened() {
         driver = WebDriverManager.chromedriver().create();
         driver.get("https://www.asos.com/nike-golf/nike-golf-air-max-90-shoes-in-blue-and-grey/prd/202358639?colourWayId=202358659&cid=4766");
     }
@@ -158,9 +168,10 @@ public class steps {
     }
 
     @Then("Price in cart equals to product sales price")
-    public void priceInCartEqualsToProductSalesPrice()  {
+    public void priceInCartEqualsToProductSalesPrice() {
         cart = new Cart(driver);
-        Assert.assertEquals(cart.getPrice(),productPage.returnPrice());
+        Assert.assertEquals(cart.getPrice(), productPage.returnPrice());
+        driver.quit();
     }
 
     @When("I press heart")
@@ -176,7 +187,8 @@ public class steps {
         basePage.openWishList();
         productPage = new ProductPage(driver);
         wishList = new WishList(driver);
-        Assert.assertEquals(productPage.returnName(),wishList.returnProductTitle());
+        Assert.assertEquals(productPage.returnName(), wishList.returnProductTitle());
+        driver.quit();
     }
 
     @Given("wishlist page with \\({int}) products in list")
@@ -195,15 +207,81 @@ public class steps {
     }
 
     @When("I click remove button on product no\\({int})")
-    public void iClickRemoveButtonOnProductNo(int productNomber) throws InterruptedException {
+    public void iClickRemoveButtonOnProductNo(int productNumber) throws InterruptedException {
         wishList = new WishList(driver);
-        wishList.dumpProductNameFromList(productNomber);
-        wishList.removeFromList(productNomber);
+        wishList.dumpProductNameFromList(productNumber);
+        wishList.removeFromList(productNumber);
     }
 
     @Then("product removed from wishlist")
     public void productRemovedFromWishlist() {
         wishList = new WishList(driver);
         Assert.assertFalse(wishList.itemOnPage());
+        driver.quit();
+    }
+
+    @Given("User not login")
+    public void userNotLogin() {
+        driver = WebDriverManager.chromedriver().create();
+        driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
+    }
+
+    @And("1 product in cart")
+    public void productsInCart() throws InterruptedException {
+        brandPage = new BrandPage(driver);
+        brandPage.openRandomProductFromBrandPage();
+        productPage = new ProductPage(driver);
+        productPage.selectSize("Any");
+        productPage.addToWishList();
+        basePage = new BasePage(driver);
+        basePage.openWishList();
+        wishList = new WishList(driver);
+        wishList.addToCart();
+        basePage = new BasePage(driver);
+        basePage.openCart();
+    }
+
+
+    @When("I processed checkout")
+    public void iProcessedCheckout() {
+        cart = new Cart(driver);
+        cart.goCheckOut();
+    }
+
+    @Then("I am navigated to login page")
+    public void iAmNavigatedToLoginPage() {
+        Assert.assertEquals(driver.getTitle(), "ASOS | Sign in");
+        driver.quit();
+    }
+
+    @When("I scroll to the footer")
+    public void iScrollToTheFooter() {
+        basePage = new BasePage(driver);
+        basePage.scrollToFooter();
+    }
+
+    @And("I click on link Mobile And ASOS apps")
+    public void iClickOnLinkMobileAndASOSApps() {
+        basePage.navigateToUorApp();
+    }
+
+    @And("I navigate to Google Play logo & click it")
+    public void iNavigateToGooglePlayLogoClickIt() {
+        ourAppsPage = new OurAppsPage(driver);
+        ourAppsPage.navigateToGooglePlay();
+    }
+
+    @Then("Opened new tap Google play -> ASOS app")
+    public void openedNewTapGooglePlayASOSApp() {
+        Set<String> handles = driver.getWindowHandles();
+        String lastWindow = "new String()";
+        for (String handle :
+                handles) {
+            lastWindow = handle;
+        }
+        driver.switchTo().window(lastWindow);
+        Assert.assertEquals(driver.getCurrentUrl(), "https://play.google.com/store/apps/details?id=com.asos.app");
+        driver.quit();
     }
 }
+

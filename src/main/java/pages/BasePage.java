@@ -25,6 +25,10 @@ public class BasePage {
     WebElement toCartButton;
     @FindBy(xpath = "//div[@class='bag-item-descriptions']")
     WebElement productFrame;
+    @FindBy(xpath = "//div[contains (@id, 'footer')]")
+    WebElement footer;
+    @FindBy(xpath = "//a[@href='https://www.asos.com/discover/our-apps/']")
+    WebElement mobileAndAsosAppLink;
 
 
     public BasePage(WebDriver driver) {
@@ -67,6 +71,13 @@ public class BasePage {
 
     public void openWishList() {
         wishListButton.click();
+    }
+    public void scrollToFooter(){
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(footer).build().perform();
+    }
+    public void navigateToUorApp(){
+        mobileAndAsosAppLink.click();
     }
 
 }

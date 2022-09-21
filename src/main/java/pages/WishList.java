@@ -1,9 +1,6 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +18,8 @@ public class WishList extends BasePage{
 WebElement firstProductTitle;
 @FindBy(xpath = "//button[@aria-label='Delete']")
 WebElement preButtonDelete;
+@FindBy(xpath = "//select[@aria-label='Size']")
+WebElement selectSizeDropdown;
     public WishList(WebDriver driver) {
         super(driver);
     }
@@ -35,22 +34,22 @@ WebElement preButtonDelete;
         wait.until(ExpectedConditions.visibilityOf(firstProductTitle));
         return firstProductTitle.getText();
     }
-   public void removeFromList(int nomber) throws InterruptedException {
+   public void removeFromList(int number) throws InterruptedException {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(preButtonDelete));
-        WebElement deteleButton = driver.findElement(By.xpath("//button[@aria-label='Delete']["+nomber+"]"));
-        deteleButton.click();
+        WebElement deleteButton = driver.findElement(By.xpath("//button[@aria-label='Delete']["+number+"]"));
+        deleteButton.click();
         Thread.sleep(2000); //need such wait for animation
     }
-    public String returnProductTitle(int nomber){
+    public String returnProductTitle(int number){
         WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         wait.until(ExpectedConditions.visibilityOf(firstProductTitle));
-        WebElement searchItem = driver.findElement(By.xpath("//div[contains (@class, 'title')]["+nomber+"]"));
+        WebElement searchItem = driver.findElement(By.xpath("//div[contains (@class, 'title')]["+number+"]"));
         return searchItem.getText();
     }
-    public void dumpProductNameFromList(int nomber){
+    public void dumpProductNameFromList(int number){
         try (FileWriter writer = new FileWriter("productNameFromWishList.txt", false)) {
-            String text = returnProductTitle(nomber);
+            String text = returnProductTitle(number);
             writer.write(text);
             writer.flush();
         } catch (IOException ex) {
@@ -77,6 +76,21 @@ WebElement preButtonDelete;
             return firstProductTitle.findElement(By.xpath("//*[contains (text(),'"+returnProductNameFromDump()+"')]")).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
+        }
+    }
+    public void selectAnySize(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(addToCart));
+        if (!addToCart.isEnabled()){
+            wait.until(ExpectedConditions.elementToBeClickable(selectSizeDropdown));
+            selectSizeDropdown.click();
+        }
+            int clickAble = 3;
+            for (int i = 2; i < clickAble; i++) {
+                try {
+                    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("///select[@aria-label='Size']/*["+i+"]")));
+                    driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")).click();
+                }catch (TimeoutException e){clickAble++;}
         }
     }
 }

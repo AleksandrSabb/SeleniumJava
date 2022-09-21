@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 6 testOk">
+    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 8 testOk random product select done but noy implemented">
+      <change afterPath="$PROJECT_DIR$/src/main/java/pages/OurAppsPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/cucumber.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productName.txt" beforeDir="false" afterPath="$PROJECT_DIR$/productName.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productNameFromWishList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/productNameFromWishList.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/Cart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/WishList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/WishList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/resources/test.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.feature" afterDir="false" />
@@ -46,16 +49,36 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Cucumber Java.Scenario: Delete item from wishlist">
-    <configuration name="Scenario: Add product to wishlist" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.RunnerTests">
+    <configuration name="Scenario: App in Google Play" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
       <option name="GLUE" value="StepsDef" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="Final" />
-      <option name="NAME_FILTER" value="^Add product to wishlist$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Add product to wishlist$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Add product to wishlist" />
+      <option name="NAME_FILTER" value="^App in Google Play$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^App in Google Play$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: App in Google Play" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: Checkout unavailable for not login users" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
+      <option name="GLUE" value="StepsDef" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="Final" />
+      <option name="NAME_FILTER" value="^Checkout unavailable for not login users$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Checkout unavailable for not login users$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Checkout unavailable for not login users" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -87,15 +110,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Filter by colour" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+    <configuration name="Scenario: Filter by price" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
       <option name="GLUE" value="StepsDef" />
       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
       <module name="Final" />
-      <option name="NAME_FILTER" value="^Filter by colour$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Filter by colour$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Filter by colour" />
+      <option name="NAME_FILTER" value="^Filter by price$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Filter by price$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: Filter by price" />
       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
@@ -107,53 +130,28 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Scenario: Search" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
-      <option name="GLUE" value="StepsDef" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+    <configuration name="RunnerTests" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Final" />
-      <option name="NAME_FILTER" value="^Search$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Search$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Search" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="PATTERN" value="runner.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Scenario: Test login with valid creads" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
-      <option name="CUCUMBER_CORE_VERSION" value="5" />
-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
-      <option name="GLUE" value="StepsDef" />
-      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
-      <module name="Final" />
-      <option name="NAME_FILTER" value="^Test login with valid creads$" />
-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Test login with valid creads$&quot;" />
-      <option name="SUGGESTED_NAME" value="Scenario: Test login with valid creads" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="io.cucumber.core.cli.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
+      <option name="PACKAGE_NAME" value="runner" />
+      <option name="MAIN_CLASS_NAME" value="runner.RunnerTests" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.RunnerTests" />
+        <item itemvalue="Cucumber Java.Scenario: App in Google Play" />
+        <item itemvalue="Cucumber Java.Scenario: Checkout unavailable for not login users" />
         <item itemvalue="Cucumber Java.Scenario: Delete item from wishlist" />
-        <item itemvalue="Cucumber Java.Scenario: Add product to wishlist" />
-        <item itemvalue="Cucumber Java.Scenario: Filter by colour" />
-        <item itemvalue="Cucumber Java.Scenario: Search" />
-        <item itemvalue="Cucumber Java.Scenario: Test login with valid creads" />
+        <item itemvalue="Cucumber Java.Scenario: Filter by price" />
       </list>
     </recent_temporary>
   </component>
@@ -201,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663690196069</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="asos 8 testOk random product select done but noy implemented">
+      <created>1663755223015</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1663755223015</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -221,6 +226,7 @@
     <MESSAGE value="asos 4 теста ок" />
     <MESSAGE value="asos 5 testOk" />
     <MESSAGE value="asos 6 testOk" />
-    <option name="LAST_COMMIT_MESSAGE" value="asos 6 testOk" />
+    <MESSAGE value="asos 8 testOk random product select done but noy implemented" />
+    <option name="LAST_COMMIT_MESSAGE" value="asos 8 testOk random product select done but noy implemented" />
   </component>
 </project>
