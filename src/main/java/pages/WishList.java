@@ -24,26 +24,22 @@ WebElement selectSizeDropdown;
         super(driver);
     }
     public void addToCart() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(addToCart));
+        waitElementToBeClickAble(addToCart);
         addToCart.click();
         Thread.sleep(2000); //need such wait for animation
     }
     public String returnProductTitle(){
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(firstProductTitle));
+        waitForVisibilityOf(firstProductTitle);
         return firstProductTitle.getText();
     }
    public void removeFromList(int number) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(preButtonDelete));
+        waitForVisibilityOf(preButtonDelete);
         WebElement deleteButton = driver.findElement(By.xpath("//button[@aria-label='Delete']["+number+"]"));
         deleteButton.click();
         Thread.sleep(2000); //need such wait for animation
     }
     public String returnProductTitle(int number){
-        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(firstProductTitle));
+        waitForVisibilityOf(firstProductTitle);
         WebElement searchItem = driver.findElement(By.xpath("//div[contains (@class, 'title')]["+number+"]"));
         return searchItem.getText();
     }
@@ -79,16 +75,15 @@ WebElement selectSizeDropdown;
         }
     }
     public void selectAnySize(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(addToCart));
+        waitForVisibilityOf(addToCart);
         if (!addToCart.isEnabled()){
-            wait.until(ExpectedConditions.elementToBeClickable(selectSizeDropdown));
+            waitElementToBeClickAble(selectSizeDropdown);
             selectSizeDropdown.click();
         }
             int clickAble = 3;
             for (int i = 2; i < clickAble; i++) {
                 try {
-                    wait.until(ExpectedConditions.elementToBeClickable(By.xpath("///select[@aria-label='Size']/*["+i+"]")));
+                    waitElementToBeClickAble(driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")));
                     driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")).click();
                 }catch (TimeoutException e){clickAble++;}
         }

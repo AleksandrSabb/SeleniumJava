@@ -14,7 +14,6 @@ import java.time.Duration;
 import java.util.Objects;
 
 public class ProductPage extends BasePage {
-    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     @FindBy(xpath = "//select[@data-id='sizeSelect']")
     WebElement selectSizeDropdown;
     @FindBy(xpath = "//select[@data-id='sizeSelect']//*")
@@ -36,13 +35,13 @@ public class ProductPage extends BasePage {
 
     public void selectSize(String size) {
         selectSizeDropdown.click();
-        wait.until(ExpectedConditions.visibilityOf(sizeValues));
+        waitForVisibilityOf(sizeValues);
 
         if (Objects.equals(size, "Any")) {
             int clickAble = 3;
             for (int i = 2; i < clickAble; i++) {
                try {
-                   wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")));
+                   waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")));
                    driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")).click();
                }catch (TimeoutException e){clickAble++;}
                  }
@@ -56,7 +55,7 @@ public class ProductPage extends BasePage {
     public void addToBag() {
         //don't work on automation soft
         addButton.click();
-        wait.until(ExpectedConditions.visibilityOf(cartAddConfirm));
+        waitForVisibilityOf(cartAddConfirm);
     }
 
     public void dumpName() {
@@ -111,7 +110,7 @@ public class ProductPage extends BasePage {
     }
 
     public void addToWishList() throws InterruptedException {
-        wait.until(ExpectedConditions.visibilityOf(addToWishListButton));
+        waitForVisibilityOf(addToWishListButton);
         addToWishListButton.click();
         Thread.sleep(3000); //need for animation
     }

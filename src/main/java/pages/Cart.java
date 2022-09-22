@@ -20,19 +20,16 @@ public class Cart extends BasePage{
         super(driver);
     }
     public String getName(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(productName));
+        waitForVisibilityOf(productName);
         return productName.getText();
     }
     public String getPrice(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(productPrice));
+        waitForVisibilityOf(productPrice);
         return productPrice.getText();
 
     }
     public void goCheckOut(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(checkOutButton));
+        waitForVisibilityOf(checkOutButton);
         checkOutButton.click();
     }
 }

@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 10 testOk random product select done but noy implemented&#10;need to add another browser">
+    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 10 testOk random product select done but noy implemented&#10;need to add another browser&#10;done waitMethods implement to BrandPage and continue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/productNameFromWishList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/productNameFromWishList.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/SingIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/Cart.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/Cart.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/WishList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/WishList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,7 +45,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Cucumber Java.Scenario: Filter by colour">
+  <component name="RunManager" selected="Cucumber Java.Feature: test">
     <configuration name="Feature: test" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
@@ -140,9 +142,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Cucumber Java.Feature: test" />
         <item itemvalue="Cucumber Java.Scenario: Filter by colour" />
         <item itemvalue="Cucumber Java.Scenario: Test login with valid creads" />
-        <item itemvalue="Cucumber Java.Feature: test" />
         <item itemvalue="JUnit.RunnerTests" />
         <item itemvalue="Cucumber Java.Scenario: App in Google Play" />
       </list>
@@ -213,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663779740936</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="asos 10 testOk random product select done but noy implemented&#10;need to add another browser&#10;done waitMethods implement to BrandPage and continue">
+      <created>1663822119043</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1663822119044</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -236,6 +245,7 @@
     <MESSAGE value="asos 8 testOk random product select done but noy implemented" />
     <MESSAGE value="asos 10 testOk random product select done but noy implemented" />
     <MESSAGE value="asos 10 testOk random product select done but noy implemented&#10;need to add another browser" />
-    <option name="LAST_COMMIT_MESSAGE" value="asos 10 testOk random product select done but noy implemented&#10;need to add another browser" />
+    <MESSAGE value="asos 10 testOk random product select done but noy implemented&#10;need to add another browser&#10;done waitMethods implement to BrandPage and continue" />
+    <option name="LAST_COMMIT_MESSAGE" value="asos 10 testOk random product select done but noy implemented&#10;need to add another browser&#10;done waitMethods implement to BrandPage and continue" />
   </component>
 </project>
