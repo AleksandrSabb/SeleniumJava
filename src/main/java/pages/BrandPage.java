@@ -101,6 +101,7 @@ public class BrandPage extends BasePage {
     }
 
     public void openRandomProductFromBrandPage() {
+        waitForVisibilityOf(firstProductOnPage);
         List<WebElement> countOnPage = driver.findElements(By.xpath("//article[@data-auto-id='productTile']"));
         int random = 1 + (int) (Math.random() * countOnPage.size());
         WebElement randomProduct = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + random + "]"));
@@ -114,5 +115,14 @@ public class BrandPage extends BasePage {
             randomProduct1.click();
         }
 
+    }
+    public void openRandomBrandPage(){
+        driver.get("https://www.asos.com/men/a-to-z-of-brands/cat/?cid=1361");
+        List<WebElement> countAlphabet = driver.findElements(By.xpath("//li/ol"));
+        int selectChar = 1 + (int) (Math.random()*countAlphabet.size());
+        List<WebElement> countInChar = driver.findElements(By.xpath("//li["+selectChar+"]/ol/*"));
+        int selectBrand = 1+ (int) (Math.random()*countInChar.size());
+        WebElement randomElement = driver.findElement(By.xpath("//li["+selectChar+"]/ol/*["+selectBrand+"]"));
+        randomElement.click();
     }
 }

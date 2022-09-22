@@ -313,12 +313,19 @@ public class steps {
     @Given("Open product page")
     public void openProductPage() {
         driver = WebDriverManager.chromedriver().create();
-        driver.get("https://www.asos.com/nike/nike-2-pack-of-reflective-scrunchies-in-black/prd/24395839?clr=black&colourWayId=60578546&cid=27112");
-    }
+        driver.get("https://www.asos.com/nike/nike-unisex-retro-collegiate-tracksuit-in-black-and-white/grp/93090?clr=black&colourWayId=201540596&cid=4766");   }
         @When("I mark all")
     public void iMarkAll() throws InterruptedException {
+        brandPage = new BrandPage(driver);
+        brandPage.openRandomBrandPage();
+        brandPage.openRandomProductFromBrandPage();
         productPage = new ProductPage(driver);
         productPage.allMarks();
+        productPage.addToWishList();
+        productPage.openWishList();
+        wishList = new WishList(driver);
+        wishList.addToCartAll();
+        wishList.openCart();
     }
 
     @Then("All market")

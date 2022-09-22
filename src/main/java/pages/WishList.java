@@ -9,6 +9,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 
 public class WishList extends BasePage{
 
@@ -86,6 +87,14 @@ WebElement selectSizeDropdown;
                     waitElementToBeClickAble(driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")));
                     driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")).click();
                 }catch (TimeoutException e){clickAble++;}
+        }
+    }
+    public void addToCartAll() throws InterruptedException {
+        waitForVisibilityOf(addToCart);
+        List<WebElement> quantity = driver.findElements(By.xpath("//ol/li"));
+        for (int i = 1; i <= quantity.size(); i++) {
+            addToCart.click();
+            Thread.sleep(2000);
         }
     }
 }
