@@ -20,8 +20,9 @@ public class SingIn extends BasePage {
     WebElement signInButton;
 
     public void enterEmail(String email) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(emailField));
+        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(emailField));*/
+        waitForVisibilityOf(emailField);
         emailField.sendKeys(email);
     }
     

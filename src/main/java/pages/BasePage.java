@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -79,5 +80,21 @@ public class BasePage {
     public void navigateToUorApp(){
         mobileAndAsosAppLink.click();
     }
-
+    // have too mach waits in code, so I create methods;
+    public void waitForVisibilityOf(WebElement element){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(element));
+    }
+    public void waitForVisibilityOf(String xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(xpath))));
+    }
+    public void waitElementToBeClickAble(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+    public void waitElementToBeClickAble(String xpath) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(xpath))));
+    }
 }

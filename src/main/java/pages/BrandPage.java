@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -29,27 +30,25 @@ public class BrandPage extends BasePage {
     }
 
     public void setColourAs(String colour) throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(colourDropDown));
+        waitElementToBeClickAble(colourDropDown);
         colourDropDown.click();
-        wait.until(ExpectedConditions.elementToBeClickable(colorSelectPane));
+        waitElementToBeClickAble(colorSelectPane);
         WebElement color = colorSelectPane.findElement(By.xpath("//div[contains (text(), '" + colour + "')]"));
-        wait.until(ExpectedConditions.visibilityOf(color));
+        waitForVisibilityOf(color);
         color.click();
-        wait.until(ExpectedConditions.elementToBeClickable(colourDropDown));
+        waitElementToBeClickAble(colourDropDown);
         colourDropDown.click();
         Thread.sleep(2000); //need for load
     }
 
     public boolean colorAsSet(String colour) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
   /*    for get all elements
         WebElement productsFromPage = driver.findElement(By.xpath("//article[@data-auto-id]")); */
 
         boolean result = true;
         if (result)
             for (int i = 1; i < 5; i++) {
-                wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]"))));
+                waitForVisibilityOf(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")));
                 driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")).click();
                 result = driver.findElement(By.xpath("//span[@class = 'product-colour']"))
                         .getText().toLowerCase().contains(colour.toLowerCase());
@@ -61,21 +60,20 @@ public class BrandPage extends BasePage {
 
 
     public void sortByPriceLtH() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(sortDropdown));
+        waitElementToBeClickAble(sortDropdown);
         sortDropdown.click();
-        wait.until(ExpectedConditions.visibilityOf(sortPriceLtHButton));
+        waitForVisibilityOf(sortPriceLtHButton);
         sortPriceLtHButton.click();
         Thread.sleep(3000); //need for wait loading
     }
 
     public boolean sortByPriceLtHcheck() {
-       boolean result = true;
+        boolean result = true;
         for (int i = 1; i < 5; i++) {
-            if (result==true) {
+            if (result == true) {
                 String valueOne;
                 String valueTwo;
-                int next = i+1;
+                int next = i + 1;
                 try {
                     valueOne = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[@data-auto-id]")).getText();
                 } catch (NoSuchElementException e) {
@@ -95,24 +93,24 @@ public class BrandPage extends BasePage {
         }
         return result;
     }
+
     public void clickOnProduct() throws InterruptedException {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.elementToBeClickable(firstProductOnPage));
+        waitElementToBeClickAble(firstProductOnPage);
         firstProductOnPage.click();
         Thread.sleep(2000);
     }
-    public void openRandomProductFromBrandPage(){
+
+    public void openRandomProductFromBrandPage() {
         List<WebElement> countOnPage = driver.findElements(By.xpath("//article[@data-auto-id='productTile']"));
-        int random = 1+(int) (Math.random()*countOnPage.size());
-        WebElement randomProduct = driver.findElement(By.xpath("//article[@data-auto-id='productTile']["+random+"]"));
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        int random = 1 + (int) (Math.random() * countOnPage.size());
+        WebElement randomProduct = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + random + "]"));
         try {
-            wait.until(ExpectedConditions.visibilityOf(randomProduct));
+            waitForVisibilityOf(randomProduct);
             randomProduct.click();
         } catch (NoSuchElementException e) {
-            random = (int) (Math.random()*(countOnPage.size()+1));
-            WebElement randomProduct1 = driver.findElement(By.xpath("//article[@data-auto-id='productTile']["+random+"]"));
-            wait.until(ExpectedConditions.visibilityOf(randomProduct1));
+            random = (int) (Math.random() * (countOnPage.size() + 1));
+            WebElement randomProduct1 = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + random + "]"));
+            waitForVisibilityOf(randomProduct1);
             randomProduct1.click();
         }
 
