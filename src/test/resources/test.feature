@@ -1,14 +1,17 @@
 Feature: Test ASOS
 
 
-  Scenario: Test login with valid creads
+  Scenario Outline: Test login with valid creads
     Given Page is opened
     When I navigate to profile icon
     And I click on signIn link
-    And I enter valid email ("mymailbox099@meta.ua")
-    And I enter valid password ("asd5329367")
+    And I enter valid email "<email>"
+    And I enter valid password "<password>"
     And I click on signIn button
     Then I see main page
+    Examples:
+      | email                | password   |
+      | mymailbox099@meta.ua | asd5329367 |
 
   Scenario: Search
     Given Page is opened

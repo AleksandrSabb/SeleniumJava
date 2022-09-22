@@ -44,17 +44,17 @@ public class steps {
         basePage.clickOnSignInLink();
     }
 
-    @And("I enter valid email \\({string})")
+ /*   @And("I enter valid <email> \\({string})")
     public void iEnterValidEmail(String email) {
         singIn = new SingIn(driver);
         singIn.enterEmail(email);
-    }
+    }*/
 
-    @And("I enter valid password \\({string})")
+ /*   @And("I enter valid password \\({string})")
     public void iEnterValidPassword(String pass) {
         singIn = new SingIn(driver);
         singIn.enterPass(pass);
-    }
+    }*/
 
     @And("I click on signIn button")
     public void iClickOnSignInButton() throws InterruptedException {
@@ -295,6 +295,19 @@ public class steps {
         driver.switchTo().window(lastWindow);
         Assert.assertEquals(driver.getCurrentUrl(), "https://play.google.com/store/apps/details?id=com.asos.app");
         driver.quit();
+    }
+
+
+    @And("I enter valid email {string}")
+    public void iEnterValidEmail(String email) {
+        singIn = new SingIn(driver);
+        singIn.enterEmail(email);
+    }
+
+    @And("I enter valid password {string}")
+    public void iEnterValidPassword(String pass) {
+        singIn = new SingIn(driver);
+        singIn.enterPass(pass);
     }
 }
 
