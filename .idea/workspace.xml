@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 10 testOk &#10;random product select done but noy implemented&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement">
+    <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 10 testOk &#10;random product select done but noy implemented&#10;randon page done but dont implement&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/productNameFromWishList.txt" beforeDir="false" afterPath="$PROJECT_DIR$/productNameFromWishList.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/ProductPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/pages/WishList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/WishList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -243,7 +240,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663851627451</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="asos 10 testOk &#10;random product select done but noy implemented&#10;randon page done but dont implement&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement">
+      <created>1663861316770</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1663861316770</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -271,6 +275,7 @@
     <MESSAGE value="asos 10 testOk random product select done but noy implemented&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature" />
     <MESSAGE value="asos 10 testOk &#10;random product select done but noy implemented&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage" />
     <MESSAGE value="asos 10 testOk &#10;random product select done but noy implemented&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement" />
-    <option name="LAST_COMMIT_MESSAGE" value="asos 10 testOk &#10;random product select done but noy implemented&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement" />
+    <MESSAGE value="asos 10 testOk &#10;random product select done but noy implemented&#10;randon page done but dont implement&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement" />
+    <option name="LAST_COMMIT_MESSAGE" value="asos 10 testOk &#10;random product select done but noy implemented&#10;randon page done but dont implement&#10;need to add another browser&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement" />
   </component>
 </project>

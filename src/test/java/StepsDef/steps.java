@@ -94,12 +94,12 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
+        brandPage = new BrandPage(driver);
+        brandPage.openRandomBrandPage();
     }
 
     @When("I set colour dropdown \\({string})")
     public void iSetColourDropdown(String colour) throws InterruptedException {
-        brandPage = new BrandPage(driver);
         brandPage.setColourAs(colour);
     }
 
@@ -164,7 +164,9 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        driver.get("https://www.asos.com/nike-golf/nike-golf-air-max-90-shoes-in-blue-and-grey/prd/202358639?colourWayId=202358659&cid=4766");
+        brandPage = new BrandPage(driver);
+        brandPage.openRandomBrandPage();
+        brandPage.openRandomProductFromBrandPage();
     }
 
     @Given("Sales product page opened")
