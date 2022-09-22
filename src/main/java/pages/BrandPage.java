@@ -121,7 +121,6 @@ public class BrandPage extends BasePage {
         int gender = 1 + (int) (Math.random()*2);
         if (gender==1) link = "https://www.asos.com/men/a-to-z-of-brands/cat/?cid=1361";
         if (gender == 2) link = "https://www.asos.com/women/a-to-z-of-brands/cat/?cid=1340";
-
         driver.get(link);
         List<WebElement> countAlphabet = driver.findElements(By.xpath("//li/ol"));
         int selectChar = 1 + (int) (Math.random()*countAlphabet.size());
@@ -129,5 +128,12 @@ public class BrandPage extends BasePage {
         int selectBrand = 1+ (int) (Math.random()*countInChar.size());
         WebElement randomElement = driver.findElement(By.xpath("//li["+selectChar+"]/ol/*["+selectBrand+"]"));
         randomElement.click();
+    }
+    public void openSalePageGenderRandom(){
+        String link = " ";
+        int gender = 1 + (int) (Math.random()*2);
+        if (gender==1) link = "https://www.asos.com/men/sale/cat/?cid=8409";
+        if (gender == 2) link = "https://www.asos.com/women/sale/cat/?cid=7046";
+        driver.get(link);
     }
 }

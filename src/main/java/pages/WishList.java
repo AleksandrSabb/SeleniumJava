@@ -35,13 +35,13 @@ WebElement selectSizeDropdown;
     }
    public void removeFromList(int number) throws InterruptedException {
         waitForVisibilityOf(preButtonDelete);
-        WebElement deleteButton = driver.findElement(By.xpath("//button[@aria-label='Delete']["+number+"]"));
+        WebElement deleteButton = driver.findElement(By.xpath("//ol//li["+number+"]//button[@aria-label='Delete']"));
         deleteButton.click();
         Thread.sleep(2000); //need such wait for animation
     }
     public String returnProductTitle(int number){
         waitForVisibilityOf(firstProductTitle);
-        WebElement searchItem = driver.findElement(By.xpath("//div[contains (@class, 'title')]["+number+"]"));
+        WebElement searchItem = driver.findElement(By.xpath("//ol/li["+number+"]//div[contains (@class, 'title')]"));
         return searchItem.getText();
     }
     public void dumpProductNameFromList(int number){
@@ -75,20 +75,8 @@ WebElement selectSizeDropdown;
             return false;
         }
     }
-    public void selectAnySize(){
-        waitForVisibilityOf(addToCart);
-        if (!addToCart.isEnabled()){
-            waitElementToBeClickAble(selectSizeDropdown);
-            selectSizeDropdown.click();
-        }
-            int clickAble = 3;
-            for (int i = 2; i < clickAble; i++) {
-                try {
-                    waitElementToBeClickAble(driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")));
-                    driver.findElement(By.xpath("///select[@aria-label='Size']/*["+i+"]")).click();
-                }catch (TimeoutException e){clickAble++;}
-        }
-    }
+
+
     public void addToCartAll() throws InterruptedException {
         waitForVisibilityOf(addToCart);
         List<WebElement> quantity = driver.findElements(By.xpath("//ol/li"));

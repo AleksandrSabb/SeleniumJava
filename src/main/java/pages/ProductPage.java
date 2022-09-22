@@ -37,15 +37,7 @@ public class ProductPage extends BasePage {
         waitForVisibilityOf(sizeValues);
 
         if (Objects.equals(size, "Any")) {
-            int clickAble = 3;
-            for (int i = 2; i < clickAble; i++) {
-                try {
-                    waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[" + i + "]")));
-                    driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[" + i + "]")).click();
-                } catch (TimeoutException e) {
-                    clickAble++;
-                }
-            }
+            allMarks();
         } else
             driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]")).click();
 

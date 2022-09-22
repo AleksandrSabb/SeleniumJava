@@ -174,8 +174,9 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        driver.get("https://www.asos.com/nike/nike-club-zip-up-hoodie-in-black/prd/202400906?clr=black&colourWayId=202400907&cid=28239");
-
+        brandPage = new BrandPage(driver);
+        brandPage.openSalePageGenderRandom();
+        brandPage.openRandomProductFromBrandPage();
     }
 
     @Then("Price in cart equals to product sales price")
@@ -207,13 +208,13 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
-        for (int i = 0; i < count; i++) {
+            for (int i = 0; i < count; i++) {
             brandPage = new BrandPage(driver);
+            brandPage.openRandomBrandPage();
             brandPage.openRandomProductFromBrandPage();
             productPage = new ProductPage(driver);
+            productPage.allMarks();
             productPage.addToWishList();
-            driver.navigate().back();
         }
         basePage = new BasePage(driver);
         basePage.openWishList();
@@ -238,15 +239,15 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        driver.get("https://www.asos.com/men/a-to-z-of-brands/nike/cat/?cid=4766&ctaref=hp|mw|prime|logo|10|nike");
+        brandPage = new BrandPage(driver);
+        brandPage.openRandomBrandPage();
     }
 
     @And("1 product in cart")
     public void productsInCart() throws InterruptedException {
-        brandPage = new BrandPage(driver);
         brandPage.openRandomProductFromBrandPage();
         productPage = new ProductPage(driver);
-        productPage.selectSize("Any");
+        productPage.allMarks();
         productPage.addToWishList();
         basePage = new BasePage(driver);
         basePage.openWishList();
