@@ -1,16 +1,15 @@
 package pages;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.TimeoutException;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.Duration;
+import java.util.List;
 import java.util.Objects;
 
 public class ProductPage extends BasePage {
@@ -40,14 +39,15 @@ public class ProductPage extends BasePage {
         if (Objects.equals(size, "Any")) {
             int clickAble = 3;
             for (int i = 2; i < clickAble; i++) {
-               try {
-                   waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")));
-                   driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*["+i+"]")).click();
-               }catch (TimeoutException e){clickAble++;}
-                 }
-        }else
+                try {
+                    waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[" + i + "]")));
+                    driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[" + i + "]")).click();
+                } catch (TimeoutException e) {
+                    clickAble++;
+                }
+            }
+        } else
             driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]")).click();
-
 
 
     }
@@ -81,6 +81,7 @@ public class ProductPage extends BasePage {
             throw new RuntimeException(e);
         }
     }
+
     public String returnPrice() {
         try (FileReader reader = new FileReader("productPrice.txt")) {
             StringBuilder result = new StringBuilder();
@@ -113,5 +114,31 @@ public class ProductPage extends BasePage {
         waitForVisibilityOf(addToWishListButton);
         addToWishListButton.click();
         Thread.sleep(3000); //need for animation
+    }
+
+    public void allMarks() {
+           try {
+               List<WebElement> sizeFieldList = driver.findElements(By.xpath("//select[@data-id='sizeSelect']"));
+
+            for (int i = 0; i < sizeFieldList.size(); i++) {
+                WebElement nextSizeField = driver.findElement(By.xpath("//select[@data-id='sizeSelect' and contains(@id," + i + ")]"));
+                nextSizeField.click();
+                waitForVisibilityOf(sizeValues);
+                int clickAble = 3;
+                for (int j = 2; j < clickAble; j++) {
+                    try {
+                        waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect' and contains(@id," + i + ")]//*[" + j + "]")));
+                        driver.findElement(By.xpath("//select[@data-id='sizeSelect' and contains(@id," + i + ")]//*[" + j + "]")).click();
+                        nextSizeField.click();
+
+                    } catch (TimeoutException e) {
+                        clickAble++;
+                    }
+                }
+            }
+        } catch (ElementNotInteractableException e) {
+               return;
+           }
+
     }
 }

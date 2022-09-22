@@ -309,5 +309,21 @@ public class steps {
         singIn = new SingIn(driver);
         singIn.enterPass(pass);
     }
+
+    @Given("Open product page")
+    public void openProductPage() {
+        driver = WebDriverManager.chromedriver().create();
+        driver.get("https://www.asos.com/nike/nike-2-pack-of-reflective-scrunchies-in-black/prd/24395839?clr=black&colourWayId=60578546&cid=27112");
+    }
+        @When("I mark all")
+    public void iMarkAll() throws InterruptedException {
+        productPage = new ProductPage(driver);
+        productPage.allMarks();
+    }
+
+    @Then("All market")
+    public void allMarket() throws InterruptedException {
+        Thread.sleep(20000);
+    }
 }
 

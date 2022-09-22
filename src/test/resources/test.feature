@@ -66,3 +66,8 @@ Feature: Test ASOS
     And I click on link Mobile And ASOS apps
     And I navigate to Google Play logo & click it
     Then Opened new tap Google play -> ASOS app
+
+    Scenario: Try to fill fields
+      Given Open product page
+      When I mark all
+      Then All market
