@@ -49,17 +49,25 @@ Feature: Test ASOS
       | S    | https://www.asos.com/adidas-originals/adidas-originals-essentials-t-shirt-in-pink/prd/201534582?clr=pink&colourWayId=201534618&cid=7113 |
       | Any  | Any                                                                                                                                     |
 
-  Scenario: Check discount prise in cart
-    Given Sales product page opened
+  Scenario Outline: Check discount prise in cart
+    Given Sales product "<page>" opened
     When I select "<size>"
     # Any -> choose first available
     And I Click add to Add to bag
     Then Price in cart equals to product sales price
+    Examples:
+      | size | page                                                                                                                  |
+      | Any  | Any                                                                                                                   |
+      | S    | https://www.asos.com/asos-design/asos-design-3-pack-rib-trunks/prd/201161619?clr=multi&colourWayId=201161620&cid=8409 |
 
-  Scenario: Add product to wishlist
-    Given Product page is opened
+  Scenario Outline: Add product to wishlist
+    Given Sales product "<page>" opened
     When I press heart
     Then Product add to my wishlist
+    Examples:
+      | page                                                                                                                  |
+      | Any                                                                                                                   |
+      | https://www.asos.com/asos-design/asos-design-3-pack-rib-trunks/prd/201161619?clr=multi&colourWayId=201161620&cid=8409 |
 
   Scenario: Delete item from wishlist
     Given wishlist page with (2) products in list
@@ -79,8 +87,3 @@ Feature: Test ASOS
     And I click on link Mobile And ASOS apps
     And I navigate to Google Play logo & click it
     Then Opened new tap Google play -> ASOS app
-
-  Scenario: Try to fill fields
-    Given Open product page
-    When I mark all
-    Then All market

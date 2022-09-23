@@ -45,18 +45,6 @@ public class steps {
         basePage.clickOnSignInLink();
     }
 
- /*   @And("I enter valid <email> \\({string})")
-    public void iEnterValidEmail(String email) {
-        singIn = new SingIn(driver);
-        singIn.enterEmail(email);
-    }*/
-
- /*   @And("I enter valid password \\({string})")
-    public void iEnterValidPassword(String pass) {
-        singIn = new SingIn(driver);
-        singIn.enterPass(pass);
-    }*/
-
     @And("I click on signIn button")
     public void iClickOnSignInButton() throws InterruptedException {
         singIn = new SingIn(driver);
@@ -186,14 +174,20 @@ public class steps {
         }
     }
 
-    @Given("Sales product page opened")
-    public void salesProductPageOpened() {
+    @Given("Sales product {string} opened")
+    public void salesProductOpened(String url) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        brandPage = new BrandPage(driver);
-        brandPage.openSalePageGenderRandom();
-        brandPage.openRandomProductFromBrandPage();
+        if (Objects.equals(url, "Any")){
+            brandPage = new BrandPage(driver);
+            brandPage.openSalePageGenderRandom();
+            brandPage.openRandomProductFromBrandPage();
+        }
+        else {
+            driver.get(url);
+        }
+
     }
 
     @Then("Price in cart equals to product sales price")
@@ -330,11 +324,7 @@ public class steps {
         singIn.enterPass(pass);
     }
 
-    @Given("Open product page")
-    public void openProductPage() {
-        driver = WebDriverManager.chromedriver().create();
-        driver.get("https://www.asos.com/nike/nike-unisex-retro-collegiate-tracksuit-in-black-and-white/grp/93090?clr=black&colourWayId=201540596&cid=4766");
-    }
+
 
     @When("I mark all")
     public void iMarkAll() throws InterruptedException {
@@ -354,6 +344,8 @@ public class steps {
     public void allMarket() throws InterruptedException {
         Thread.sleep(20000);
     }
+
+
 
 
 }
