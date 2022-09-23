@@ -10,6 +10,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 
+import java.util.Objects;
 import java.util.Set;
 
 
@@ -89,24 +90,28 @@ public class steps {
     }
 
 
-    @Given("Brand page is opened")
-    public void brandPageIsOpened() {
+    @Given("Brand {string} is opened")
+    public void brandIsOpened(String url) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
         brandPage = new BrandPage(driver);
-        brandPage.openRandomBrandPage();
+        if (Objects.equals(url, "Any")) brandPage.openRandomBrandPage();
+        else driver.get(url);
     }
 
-    @When("I set colour dropdown \\({string})")
-    public void iSetColourDropdown(String colour) throws InterruptedException {
-        brandPage.setColourAs(colour);
+    @When("I set {string} dropdown")
+    public void iSetDropdown(String colour) throws InterruptedException {
+        if (Objects.equals(colour, "Any")) brandPage.selectAnyColorFromDropdown();
+        else brandPage.setColourAs(colour);
     }
 
-    @Then("I see only products with color \\({string})")
-    public void iSeeOnlyProductsWithColor(String colour) {
+    @Then("I see only products with {string}")
+    public void iSeeOnlyProductsWith(String colour) {
         brandPage = new BrandPage(driver);
-        Assert.assertTrue(brandPage.colorAsSet(colour));
+        if(Objects.equals(colour, "Any")) Assert.assertTrue(brandPage.colorAsSet(brandPage.getColorSelect()));
+        else Assert.assertTrue(brandPage.colorAsSet(colour));
+
         driver.quit();
     }
 
@@ -335,5 +340,9 @@ public class steps {
     public void allMarket() throws InterruptedException {
         Thread.sleep(20000);
     }
+
+
+
+
 }
 

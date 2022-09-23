@@ -19,10 +19,14 @@ Feature: Test ASOS
     And Press Enter
     Then I see result of my request ("Nike")
 
-  Scenario: Filter by colour
-    Given Brand page is opened
-    When I set colour dropdown ("Blue")
-    Then I see only products with color ("Blue")
+  Scenario Outline: Filter by colour
+    Given Brand "<page>" is opened
+    When I set "<colour>" dropdown
+    Then I see only products with "<colour>"
+    Examples:
+      | colour | page                                                           |
+#      | Blue   | https://www.asos.com/men/a-to-z-of-brands/adidas/cat/?cid=7113 |
+      | Any    | Any                                                            |
 
   Scenario: Filter by price
     Given Brand page is opened
@@ -67,7 +71,7 @@ Feature: Test ASOS
     And I navigate to Google Play logo & click it
     Then Opened new tap Google play -> ASOS app
 
-    Scenario: Try to fill fields
-      Given Open product page
-      When I mark all
-      Then All market
+  Scenario: Try to fill fields
+    Given Open product page
+    When I mark all
+    Then All market

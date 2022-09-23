@@ -1,14 +1,14 @@
 package pages;
 
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.time.Duration;
 import java.util.List;
 
@@ -47,7 +47,7 @@ public class BrandPage extends BasePage {
 
         boolean result = true;
         if (result)
-            for (int i = 1; i < 5; i++) {
+            for (int i = 1; i < 2; i++) {  //return 5 after
                 waitForVisibilityOf(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")));
                 driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")).click();
                 result = driver.findElement(By.xpath("//span[@class = 'product-colour']"))
@@ -116,24 +116,73 @@ public class BrandPage extends BasePage {
         }
 
     }
-    public void openRandomBrandPage(){
+
+    public void openRandomBrandPage() {
         String link = " ";
-        int gender = 1 + (int) (Math.random()*2);
-        if (gender==1) link = "https://www.asos.com/men/a-to-z-of-brands/cat/?cid=1361";
+        int gender = 1 + (int) (Math.random() * 2);
+        if (gender == 1) link = "https://www.asos.com/men/a-to-z-of-brands/cat/?cid=1361";
         if (gender == 2) link = "https://www.asos.com/women/a-to-z-of-brands/cat/?cid=1340";
         driver.get(link);
         List<WebElement> countAlphabet = driver.findElements(By.xpath("//li/ol"));
-        int selectChar = 1 + (int) (Math.random()*countAlphabet.size());
-        List<WebElement> countInChar = driver.findElements(By.xpath("//li["+selectChar+"]/ol/*"));
-        int selectBrand = 1+ (int) (Math.random()*countInChar.size());
-        WebElement randomElement = driver.findElement(By.xpath("//li["+selectChar+"]/ol/*["+selectBrand+"]"));
+        int selectChar = 1 + (int) (Math.random() * countAlphabet.size());
+        List<WebElement> countInChar = driver.findElements(By.xpath("//li[" + selectChar + "]/ol/*"));
+        int selectBrand = 1 + (int) (Math.random() * countInChar.size());
+        WebElement randomElement = driver.findElement(By.xpath("//li[" + selectChar + "]/ol/*[" + selectBrand + "]"));
         randomElement.click();
     }
-    public void openSalePageGenderRandom(){
+
+    public void openSalePageGenderRandom() {
         String link = " ";
-        int gender = 1 + (int) (Math.random()*2);
-        if (gender==1) link = "https://www.asos.com/men/sale/cat/?cid=8409";
+        int gender = 1 + (int) (Math.random() * 2);
+        if (gender == 1) link = "https://www.asos.com/men/sale/cat/?cid=8409";
         if (gender == 2) link = "https://www.asos.com/women/sale/cat/?cid=7046";
         driver.get(link);
+    }
+
+    public void selectAnyColorFromDropdown() {
+        int trays =1;
+        for (int i = 0; i < trays; i++) {
+            try {
+                waitElementToBeClickAble(colourDropDown);
+                colourDropDown.click();
+                waitElementToBeClickAble(colorSelectPane);
+                List<WebElement> colorsCount = driver.findElements(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li"));
+                int randomColor = 1 + (int) (Math.random() * colorsCount.size());
+                waitElementToBeClickAble(driver.findElement(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li[" + randomColor + "]")));
+                dumpColourSelect(driver.findElement(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li[" + randomColor + "]//div//div[2]")));
+                driver.findElement(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li[" + randomColor + "]")).click();
+                colourDropDown.click();
+            } catch (TimeoutException e) {
+                trays++;
+                openRandomBrandPage();
+            }
+        }
+    }
+    public void dumpColourSelect(WebElement element){
+        try (FileWriter writer = new FileWriter("randomColour.txt", false)) {
+            String text = element.getText();
+            writer.write(text);
+            writer.flush();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        } catch (RuntimeException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public String getColorSelect(){
+        try (FileReader reader = new FileReader("randomColour.txt")) {
+            StringBuilder result = new StringBuilder();
+            int c;
+            while ((c = reader.read()) != -1) {
+                result.append((char) c);
+            }
+            String getColor = result.toString();
+            int endChar = getColor.indexOf('(');
+            getColor = getColor.substring(0,endChar);
+            return getColor;
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;
     }
 }

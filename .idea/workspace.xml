@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8198a482-79a9-4c4e-ac13-fc55da985f20" name="Changes" comment="asos 10 testOk &#10;after implement any page need to add option to the given&#10;need to add another browser&#10;random product select done &#10;randon page done add gender in random&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/pages/BrandPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StepsDef/steps.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/test.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/test.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +43,7 @@
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
 }</component>
-  <component name="RunManager" selected="Cucumber Java.Feature: test">
+  <component name="RunManager" selected="Cucumber Java.Scenario: Filter by colour">
     <configuration name="Feature: test" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/test.feature" />
@@ -137,8 +140,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Cucumber Java.Feature: test" />
         <item itemvalue="Cucumber Java.Scenario: Filter by colour" />
+        <item itemvalue="Cucumber Java.Feature: test" />
         <item itemvalue="Cucumber Java.Scenario: Try to fill fields" />
         <item itemvalue="Cucumber Java.Scenario: Test login with valid creads" />
         <item itemvalue="JUnit.RunnerTests" />
@@ -259,7 +262,14 @@
       <option name="project" value="LOCAL" />
       <updated>1663865838110</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="asos 10 testOk &#10;after implement any page need to add option to the given&#10;need to add another browser&#10;random product select done &#10;randon page done add gender in random&#10;waitMethods implement&#10;add Example to test.feature&#10;done method allMarks for ProductPage but don't implement">
+      <created>1663866935561</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1663866935561</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
