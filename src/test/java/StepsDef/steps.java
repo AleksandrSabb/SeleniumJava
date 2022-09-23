@@ -109,7 +109,7 @@ public class steps {
     @Then("I see only products with {string}")
     public void iSeeOnlyProductsWith(String colour) {
         brandPage = new BrandPage(driver);
-        if(Objects.equals(colour, "Any")) Assert.assertTrue(brandPage.colorAsSet(brandPage.getColorSelect()));
+        if (Objects.equals(colour, "Any")) Assert.assertTrue(brandPage.colorAsSet(brandPage.getColorSelect()));
         else Assert.assertTrue(brandPage.colorAsSet(colour));
 
         driver.quit();
@@ -135,13 +135,20 @@ public class steps {
         brandPage.clickOnProduct();
     }
 
-    @When("I select size\\({string})")
-    public void iSelectSize(String size) {
+    @When("I select {string}")
+    public void iSelect(String size) throws InterruptedException {
+        if (size == "Any") {
+            productPage = new ProductPage(driver);
+            productPage.allMarks();
+            productPage.dumpName();
+            productPage.dumpPrice();
+        } else {
+            productPage = new ProductPage(driver);
+            productPage.selectSize(size);
+            productPage.dumpName();
+            productPage.dumpPrice();
+        }
 
-        productPage = new ProductPage(driver);
-        productPage.selectSize(size);
-        productPage.dumpName();
-        productPage.dumpPrice();
     }
 
     @And("I Click add to Add to bag")
@@ -164,14 +171,19 @@ public class steps {
         driver.quit();
     }
 
-    @Given("Product page is opened")
-    public void productPageIsOpened() {
+    @Given("Product {string} is opened")
+    public void productIsOpened(String url) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        brandPage = new BrandPage(driver);
-        brandPage.openRandomBrandPage();
-        brandPage.openRandomProductFromBrandPage();
+        if (Objects.equals(url, "Any")) {
+            brandPage = new BrandPage(driver);
+            brandPage.openRandomBrandPage();
+            brandPage.openRandomProductFromBrandPage();
+        } else {
+            productPage = new ProductPage(driver);
+            driver.get(url);
+        }
     }
 
     @Given("Sales product page opened")
@@ -213,7 +225,7 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-            for (int i = 0; i < count; i++) {
+        for (int i = 0; i < count; i++) {
             brandPage = new BrandPage(driver);
             brandPage.openRandomBrandPage();
             brandPage.openRandomProductFromBrandPage();
@@ -321,8 +333,10 @@ public class steps {
     @Given("Open product page")
     public void openProductPage() {
         driver = WebDriverManager.chromedriver().create();
-        driver.get("https://www.asos.com/nike/nike-unisex-retro-collegiate-tracksuit-in-black-and-white/grp/93090?clr=black&colourWayId=201540596&cid=4766");   }
-        @When("I mark all")
+        driver.get("https://www.asos.com/nike/nike-unisex-retro-collegiate-tracksuit-in-black-and-white/grp/93090?clr=black&colourWayId=201540596&cid=4766");
+    }
+
+    @When("I mark all")
     public void iMarkAll() throws InterruptedException {
         brandPage = new BrandPage(driver);
         brandPage.openRandomBrandPage();
@@ -340,8 +354,6 @@ public class steps {
     public void allMarket() throws InterruptedException {
         Thread.sleep(20000);
     }
-
-
 
 
 }

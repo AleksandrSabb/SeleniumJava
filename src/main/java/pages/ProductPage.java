@@ -32,15 +32,24 @@ public class ProductPage extends BasePage {
         super(driver);
     }
 
-    public void selectSize(String size) {
+    public void selectSize(String size) throws InterruptedException {
         selectSizeDropdown.click();
         waitForVisibilityOf(sizeValues);
 
         if (Objects.equals(size, "Any")) {
             allMarks();
-        } else
-            driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]")).click();
+        } else {
 
+            List<WebElement> matches = driver.findElements(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]"));
+            for (int i = 0; i <matches.size() ; i++) {
+                if (Objects.equals(size, matches.get(i).getText().substring(0, size.length()))){
+                    waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]["+(i+1)+"]")));
+                    driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]["+(i+1)+"]")).click();
+                    selectSizeDropdown.click();
+                }
+            }
+
+        }
 
     }
 
