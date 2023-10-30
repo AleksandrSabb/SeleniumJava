@@ -15,9 +15,9 @@ Feature: Test ASOS
 
   Scenario: Search
     Given Page is opened
-    When I type text ("Nike")in search field
+    When I type text ("Adidas")in search field
     And Press Enter
-    Then I see result of my request ("Nike")
+    Then I see result of my request ("Adidas")
 
   Scenario Outline: Filter by colour
     Given Brand "<page>" is opened

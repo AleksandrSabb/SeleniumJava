@@ -12,7 +12,7 @@ import java.time.Duration;
 
 public class BasePage {
     WebDriver driver;
-    @FindBy(xpath = "//li[@class='_3Wo6fpk mD8oZFx']")
+    @FindBy(xpath = "//button[@data-testid='myAccountIcon']")
     WebElement myAccountDropdown;
     @FindBy(xpath = "//a[@data-testid='signin-link']")
     WebElement signinLink;

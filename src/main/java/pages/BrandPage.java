@@ -16,7 +16,7 @@ public class BrandPage extends BasePage {
 
     @FindBy(xpath = "//div[contains (text(), 'Colour')]")
     WebElement colourDropDown;
-    @FindBy(xpath = "//div[@class = 'oBN6c3V EWBhZgg']")
+    @FindBy(xpath = "//div[@class = 'collapsibleMenu_oBN6c collapsibleMenu__open_EWBhZ']")
     WebElement colorSelectPane;
     @FindBy(xpath = "//li[@data-dropdown-id='sort']")
     WebElement sortDropdown;
@@ -48,9 +48,9 @@ public class BrandPage extends BasePage {
         boolean result = true;
         if (result)
             for (int i = 1; i < 2; i++) {  //return 5 after
-                waitForVisibilityOf(driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")));
-                driver.findElement(By.xpath("//article[@data-auto-id][" + i + "]")).click();
-                result = driver.findElement(By.xpath("//span[@class = 'product-colour']"))
+                waitForVisibilityOf(driver.findElement(By.xpath("//section[@data-auto-id='1']/article[" + i + "]")));
+                driver.findElement(By.xpath("//section[@data-auto-id='1']/article[" + i + "]")).click();
+                result = driver.findElement(By.xpath("//div[@data-testid='productColour']/p"))
                         .getText().toLowerCase().contains(colour.toLowerCase());
                 driver.navigate().back();
             }
@@ -146,11 +146,11 @@ public class BrandPage extends BasePage {
                 waitElementToBeClickAble(colourDropDown);
                 colourDropDown.click();
                 waitElementToBeClickAble(colorSelectPane);
-                List<WebElement> colorsCount = driver.findElements(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li"));
+                List<WebElement> colorsCount = driver.findElements(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li"));
                 int randomColor = 1 + (int) (Math.random() * colorsCount.size());
-                waitElementToBeClickAble(driver.findElement(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li[" + randomColor + "]")));
-                dumpColourSelect(driver.findElement(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li[" + randomColor + "]//div//div[2]")));
-                driver.findElement(By.xpath("//div[@class = 'oBN6c3V EWBhZgg']//ul/li[" + randomColor + "]")).click();
+                waitElementToBeClickAble(driver.findElement(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li[" + randomColor + "]")));
+                dumpColourSelect(driver.findElement(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li[" + randomColor + "]//div//div[2]")));
+                driver.findElement(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li[" + randomColor + "]")).click();
                 colourDropDown.click();
             } catch (TimeoutException e) {
                 trays++;

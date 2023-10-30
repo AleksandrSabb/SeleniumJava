@@ -7,6 +7,7 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 
@@ -30,6 +31,7 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
+        //driver =new ChromeDriver();    //WebDriverManager.chromedriver().capabilities(options).create();
         driver.get("https://www.asos.com/");
     }
 
