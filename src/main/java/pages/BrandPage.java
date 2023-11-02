@@ -18,7 +18,7 @@ public class BrandPage extends BasePage {
     WebElement colourDropDown;
     @FindBy(xpath = "//div[@class = 'collapsibleMenu_oBN6c collapsibleMenu__open_EWBhZ']")
     WebElement colorSelectPane;
-    @FindBy(xpath = "//li[@data-dropdown-id='sort']")
+    @FindBy(xpath = "//li[@data-auto-id='sort']")
     WebElement sortDropdown;
     @FindBy(xpath = "//li[@id='plp_web_sort_price_low_to_high']")
     WebElement sortPriceLtHButton;
@@ -64,10 +64,14 @@ public class BrandPage extends BasePage {
         sortDropdown.click();
         waitForVisibilityOf(sortPriceLtHButton);
         sortPriceLtHButton.click();
+
         Thread.sleep(3000); //need for wait loading
+
+        waitForVisibilityOf(driver.findElement(By.xpath("//article")));
     }
 
     public boolean sortByPriceLtHcheck() {
+
         boolean result = true;
         for (int i = 1; i < 5; i++) {
             if (result == true) {
@@ -75,20 +79,20 @@ public class BrandPage extends BasePage {
                 String valueTwo;
                 int next = i + 1;
                 try {
-                    valueOne = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[@data-auto-id]")).getText();
+                    valueOne = driver.findElement(By.xpath("//article[" + i + "]//span[2]/span")).getText();
+
                 } catch (NoSuchElementException e) {
-                    valueOne = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + i + "]//span//span[1]")).getText();
+                    valueOne = driver.findElement(By.xpath("//article[" + i + "]//span[1]/span")).getText();
                 }
                 try {
-                    valueTwo = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + next + "]//span[@data-auto-id]")).getText();
+                    valueTwo = driver.findElement(By.xpath("//article[" + i + "]//span[2]/span")).getText();
                 } catch (NoSuchElementException e) {
-                    valueTwo = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + next + "]//span//span[1]")).getText();
+                    valueTwo = driver.findElement(By.xpath("//article[" + i + "]//span[1]/span")).getText();
                 }
                 valueOne = valueOne.substring(1).replace(".", "");
                 valueTwo = valueTwo.substring(1).replace(".", "");
                 result = (Integer.parseInt(valueOne) <= Integer.parseInt(valueTwo));
-                System.out.println(result);
-            } else result = false;
+                } else result = false;
 
         }
         return result;
