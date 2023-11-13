@@ -7,7 +7,6 @@ import io.cucumber.java.en.When;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.Assert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import pages.*;
 
@@ -31,17 +30,15 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
-        //driver =new ChromeDriver();    //WebDriverManager.chromedriver().capabilities(options).create();
-        driver.get("https://www.asos.com/");
-    }
 
-    @When("I navigate to profile icon")
-    public void iNavigateToProfileIconClickOnSignInLink() {
+        driver.get("https://www.shein.com/");
         basePage = new BasePage(driver);
-        basePage.navigateToMyAccount();
+        basePage.closeAdd();
+
     }
 
-    @And("I click on signIn link")
+
+    @When("I click on signIn link")
     public void iClickOnSignInLink() {
         basePage = new BasePage(driver);
         basePage.clickOnSignInLink();
@@ -51,12 +48,11 @@ public class steps {
     public void iClickOnSignInButton() throws InterruptedException {
         singIn = new SingIn(driver);
         singIn.clickSignIn();
-        Thread.sleep(3000);
     }
 
-    @Then("I see main page")
-    public void iSeeMainPage() {
-        Assert.assertEquals("ASOS | Online Shopping for the Latest Clothes & Fashion", driver.getTitle());
+    @Then("I see user page")
+    public void iSeeUserPage() {
+        Assert.assertEquals("My ACCOUNT | SHEIN", driver.getTitle());
         driver.quit();
     }
 
@@ -75,32 +71,34 @@ public class steps {
     @Then("I see result of my request \\({string})")
     public void iSeeResultOfMyRequest(String text) {
         searchPage = new SearchPage(driver);
-        Assert.assertEquals(searchPage.getSearchItem(text), searchPage.getResultTitle());
+        Assert.assertEquals(text, searchPage.getResultTitle());
         driver.quit();
     }
 
 
-    @Given("Brand {string} is opened")
-    public void brandIsOpened(String url) {
+    @Given("Category {string} is opened")
+    public void categoryIsOpened(String category) {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
+        driver.get("https://www.shein.com/");
+        basePage = new BasePage(driver);
+        basePage.closeAdd();
         brandPage = new BrandPage(driver);
-        if (Objects.equals(url, "Any")) brandPage.openRandomBrandPage();
-        else driver.get(url);
+        brandPage.openCategory(category);
+
     }
 
-    @When("I set {string} dropdown")
-    public void iSetDropdown(String colour) throws InterruptedException {
-        if (Objects.equals(colour, "Any")) brandPage.selectAnyColorFromDropdown();
-        else brandPage.setColourAs(colour);
+    @When("I set {string}")
+    public void iSetColour(String colour) throws InterruptedException {
+        brandPage.selectColor(colour);
     }
 
     @Then("I see only products with {string}")
-    public void iSeeOnlyProductsWith(String colour) {
+    public void iSeeOnlyProductsWith(String colour) throws InterruptedException {
         brandPage = new BrandPage(driver);
-        if (Objects.equals(colour, "Any")) Assert.assertTrue(brandPage.colorAsSet(brandPage.getColorSelect()));
-        else Assert.assertTrue(brandPage.colorAsSet(colour));
+        Assert.assertTrue(brandPage.colorAsSet(brandPage.getColorSelect()));
+
 
         driver.quit();
     }
@@ -168,7 +166,7 @@ public class steps {
         driver = WebDriverManager.chromedriver().capabilities(options).create();
         if (Objects.equals(url, "Any")) {
             brandPage = new BrandPage(driver);
-            brandPage.openRandomBrandPage();
+            brandPage.openCategory(url);
             brandPage.openRandomProductFromBrandPage();
         } else {
             productPage = new ProductPage(driver);
@@ -223,7 +221,7 @@ public class steps {
         driver = WebDriverManager.chromedriver().capabilities(options).create();
         for (int i = 0; i < count; i++) {
             brandPage = new BrandPage(driver);
-            brandPage.openRandomBrandPage();
+            brandPage.openCategory("Any");
             brandPage.openRandomProductFromBrandPage();
             productPage = new ProductPage(driver);
             productPage.allMarks();
@@ -253,7 +251,7 @@ public class steps {
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
         brandPage = new BrandPage(driver);
-        brandPage.openRandomBrandPage();
+        brandPage.openCategory("Any");
     }
 
     @And("1 product in cart")
@@ -331,7 +329,7 @@ public class steps {
     @When("I mark all")
     public void iMarkAll() throws InterruptedException {
         brandPage = new BrandPage(driver);
-        brandPage.openRandomBrandPage();
+        brandPage.openCategory("Any");
         brandPage.openRandomProductFromBrandPage();
         productPage = new ProductPage(driver);
         productPage.allMarks();
@@ -348,7 +346,15 @@ public class steps {
     }
 
 
+    @And("I click on continue button")
+    public void iClickOnContinueButton() throws InterruptedException {
+        singIn = new SingIn(driver);
+        singIn.clickContinue();
+    }
 
-
+    @And("I click on slip button")
+    public void iClickOnSlipButton() {
+        singIn.clickSkip();
+    }
 }
 

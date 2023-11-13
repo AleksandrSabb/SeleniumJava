@@ -12,25 +12,41 @@ public class SingIn extends BasePage {
         super(driver);
     }
 
-    @FindBy(xpath = "//input[@name= 'Username']")
+    @FindBy(xpath = "//input[@aria-label='Email Address:']")
     WebElement emailField;
-    @FindBy(xpath = "//input[@name= 'Password']")
+    @FindBy(xpath = "//div[@class='main-content']//input[@aria-label='Password:']")
     WebElement passwordField;
-    @FindBy(xpath = "//input[@id='signin']")
+    @FindBy(xpath = "//div[@class='main-content']//span[contains (., 'Sign In')]")
     WebElement signInButton;
+    @FindBy(xpath = "//span[contains (., 'CONTINUE')]")
+    WebElement continueButton;
+
+    @FindBy(xpath = "//span[contains (., 'Skip')]")
+    WebElement skipButton;
 
     public void enterEmail(String email) {
-        /*WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(emailField));*/
         waitForVisibilityOf(emailField);
         emailField.sendKeys(email);
     }
     
     public void enterPass(String pass) {
+        waitForVisibilityOf(passwordField);
         passwordField.sendKeys(pass);
     }
 
     public void clickSignIn() {
         signInButton.click();
+    }
+
+    public void clickContinue() {
+        waitForVisibilityOf(continueButton);
+        continueButton.click();
+
+    }
+
+    public void clickSkip() {
+        waitForVisibilityOf(skipButton);
+        skipButton.click();
+
     }
 }

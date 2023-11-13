@@ -3,14 +3,12 @@ package pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
+import java.util.Objects;
 
 public class BrandPage extends BasePage {
 
@@ -24,6 +22,12 @@ public class BrandPage extends BasePage {
     WebElement sortPriceLtHButton;
     @FindBy(xpath = "//article[@data-auto-id]")
     WebElement firstProductOnPage;
+    @FindBy(xpath = "//a[contains (., 'Women Clothing')]")
+    WebElement womenClothing;
+    @FindBy(xpath = "//div[@class='header-optimize__cate-controller']/a[contains (., 'Kids')]")
+    WebElement kidsClothing;
+    @FindBy(xpath = "//a[contains (., 'Men Fashion')]")
+    WebElement menClothing;
 
     public BrandPage(WebDriver driver) {
         super(driver);
@@ -41,17 +45,20 @@ public class BrandPage extends BasePage {
         Thread.sleep(2000); //need for load
     }
 
-    public boolean colorAsSet(String colour) {
-  /*    for get all elements
-        WebElement productsFromPage = driver.findElement(By.xpath("//article[@data-auto-id]")); */
+    public boolean colorAsSet(String color) throws InterruptedException {
 
         boolean result = true;
         if (result)
             for (int i = 1; i < 2; i++) {  //return 5 after
-                waitForVisibilityOf(driver.findElement(By.xpath("//section[@data-auto-id='1']/article[" + i + "]")));
-                driver.findElement(By.xpath("//section[@data-auto-id='1']/article[" + i + "]")).click();
-                result = driver.findElement(By.xpath("//div[@data-testid='productColour']/p"))
-                        .getText().toLowerCase().contains(colour.toLowerCase());
+                WebElement element = driver.findElement(By.xpath("//section[@role='main']//section[@role='listitem']["+i+"]"));
+                waitForVisibilityOf(element);
+                Thread.sleep(2000);
+                element.click();
+                System.out.println(color);
+                result = driver.findElement(By.xpath("//div[@class='color-block']/span[contains (@class, 'color')]"))
+                        .getText().contains(color);
+                System.out.println(driver.findElement(By.xpath("//div[@class='color-block']/span[contains (@class, 'color')]"))
+                        .getText());
                 driver.navigate().back();
             }
         return result;
@@ -121,18 +128,23 @@ public class BrandPage extends BasePage {
 
     }
 
-    public void openRandomBrandPage() {
-        String link = " ";
-        int gender = 1 + (int) (Math.random() * 2);
-        if (gender == 1) link = "https://www.asos.com/men/a-to-z-of-brands/cat/?cid=1361";
-        if (gender == 2) link = "https://www.asos.com/women/a-to-z-of-brands/cat/?cid=1340";
-        driver.get(link);
-        List<WebElement> countAlphabet = driver.findElements(By.xpath("//li/ol"));
-        int selectChar = 1 + (int) (Math.random() * countAlphabet.size());
-        List<WebElement> countInChar = driver.findElements(By.xpath("//li[" + selectChar + "]/ol/*"));
-        int selectBrand = 1 + (int) (Math.random() * countInChar.size());
-        WebElement randomElement = driver.findElement(By.xpath("//li[" + selectChar + "]/ol/*[" + selectBrand + "]"));
-        randomElement.click();
+    public void openCategory(String category) {
+        if (Objects.equals(category, "Any")) {
+            int randomCategory = 1 + (int) (Math.random() * 3);
+            switch (randomCategory) {
+                case 1:
+                    womenClothing.click();
+                    break;
+                case 2:
+                    kidsClothing.click();
+                    break;
+                case 3:
+                    menClothing.click();
+                    break;
+            }
+        } else {
+            driver.findElement(By.xpath("//div[@class='header-optimize__cate-controller']/a[contains (., '" + category + "')]")).click();
+        }
     }
 
     public void openSalePageGenderRandom() {
@@ -143,28 +155,26 @@ public class BrandPage extends BasePage {
         driver.get(link);
     }
 
-    public void selectAnyColorFromDropdown() {
-        int trays =1;
-        for (int i = 0; i < trays; i++) {
-            try {
-                waitElementToBeClickAble(colourDropDown);
-                colourDropDown.click();
-                waitElementToBeClickAble(colorSelectPane);
-                List<WebElement> colorsCount = driver.findElements(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li"));
-                int randomColor = 1 + (int) (Math.random() * colorsCount.size());
-                waitElementToBeClickAble(driver.findElement(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li[" + randomColor + "]")));
-                dumpColourSelect(driver.findElement(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li[" + randomColor + "]//div//div[2]")));
-                driver.findElement(By.xpath("//ul[@class='ul_NDd_1 listMoreThan4Items_qcxkF']/li[" + randomColor + "]")).click();
-                colourDropDown.click();
-            } catch (TimeoutException e) {
-                trays++;
-                openRandomBrandPage();
-            }
+    public void selectColor(String color) throws InterruptedException {
+        switch (color){
+            case "Any":
+                List <WebElement> allColors = driver.findElements(By.xpath("//div[@aria-label='Color']//img"));
+                int randomColorNumber = 1 + (int) (Math.random() * allColors.size());
+                WebElement randomColor = driver.findElement(By.xpath("//div[@class='side-filter__item-content-each side-filter__item-content-each_img']["+randomColorNumber+"]//img"));
+                dumpColourSelect(randomColor);
+                randomColor.click();
+                break;
+            default:
+                WebElement element = driver.findElement(By.xpath("//div[@aria-label='Color']//img[@title='"+color+"']"));
+                dumpColourSelect(element);
+                element.click();
+                break;
         }
+        Thread.sleep(5000);
     }
     public void dumpColourSelect(WebElement element){
         try (FileWriter writer = new FileWriter("randomColour.txt", false)) {
-            String text = element.getText();
+            String text = element.getAttribute("title");
             writer.write(text);
             writer.flush();
         } catch (IOException ex) {
@@ -182,7 +192,7 @@ public class BrandPage extends BasePage {
             }
             String getColor = result.toString();
             int endChar = getColor.indexOf('(');
-            getColor = getColor.substring(0,endChar);
+            //getColor = getColor.substring(0,endChar);
             return getColor;
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

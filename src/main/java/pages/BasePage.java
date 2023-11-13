@@ -1,6 +1,5 @@
 package pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -14,8 +13,8 @@ public class BasePage {
     WebDriver driver;
     @FindBy(xpath = "//button[@data-testid='myAccountIcon']")
     WebElement myAccountDropdown;
-    @FindBy(xpath = "//a[@data-testid='signin-link']")
-    WebElement signinLink;
+    @FindBy(xpath = "//a[@aria-label='Account']")
+    WebElement signinButton;
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
     @FindBy(xpath = "//div[@id='miniBagDropdown']")
@@ -30,6 +29,8 @@ public class BasePage {
     WebElement footer;
     @FindBy(xpath = "//a[@href='https://www.asos.com/discover/our-apps/']")
     WebElement mobileAndAsosAppLink;
+    @FindBy(xpath = "//i[@class='iconfont icon-close she-close']")
+    WebElement addClose;
 
 
     public BasePage(WebDriver driver) {
@@ -42,10 +43,15 @@ public class BasePage {
         actions.moveToElement(myAccountDropdown).build().perform();
     }
 
+    public void closeAdd() {
+        waitForVisibilityOf(addClose);
+        addClose.click();
+    }
+
     public void clickOnSignInLink() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(signinLink));
-        signinLink.click();
+        wait.until(ExpectedConditions.visibilityOf(signinButton));
+        signinButton.click();
     }
 
     public void Login() {
