@@ -2,13 +2,10 @@ package pages;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,35 +16,32 @@ public class ProductPage extends BasePage {
     WebElement sizeValues;
     @FindBy(xpath = "//button[@data-test-id='add-button']")
     WebElement addButton;
-    @FindBy(xpath = "//h1[1]")
+    @FindBy(xpath = "//h1")
     WebElement productName;
-    @FindBy(xpath = "//div/div/span[@data-testid='current-price']")
+    @FindBy(xpath = "//div[@class='product-intro__head-mainprice']/div/span")
     WebElement productPrice;
     @FindBy(xpath = "//div[@data-test-id='data-test-id' ]")
     WebElement cartAddConfirm;
     @FindBy(xpath = "//section[@id='core-product']//button[@data-testid='saveForLater']")
     WebElement addToWishListButton;
+    @FindBy(xpath = "//i[@class='iconfont icon-close she-close']")
+    WebElement addClose;
+    @FindBy(xpath = "//button[@class='she-btn-xl she-btn-black']")
+    WebElement addToCart;
 
     public ProductPage(WebDriver driver) {
         super(driver);
     }
 
     public void selectSize(String size) throws InterruptedException {
-        selectSizeDropdown.click();
-        waitForVisibilityOf(sizeValues);
 
         if (Objects.equals(size, "Any")) {
-            allMarks();
+            selectFirstSize();
         } else {
-
-            List<WebElement> matches = driver.findElements(By.xpath("//select[@id='variantSelector']//*[contains (text(),'" + size + "')]"));
-            for (int i = 0; i <matches.size() ; i++) {
-                if (Objects.equals(size, matches.get(i).getText().substring(0, size.length()))){
-                    waitElementToBeClickAble(driver.findElement(By.xpath("//select[@id='variantSelector']//*[contains (text(),'" + size + "')]["+(i+1)+"]")));
-                    driver.findElement(By.xpath("//select[@id='variantSelector']//*[contains (text(),'" + size + "')]["+(i+1)+"]")).click();
-                    selectSizeDropdown.click();
-                }
-            }
+            waitForVisibilityOf(addClose);
+            addClose.click();
+            WebElement reqSize = driver.findElement(By.xpath("//div[@class='product-intro__size-choose fsp-element']//p[contains (., '"+size+"')]"));
+            reqSize.click();
 
         }
 
@@ -74,7 +68,8 @@ public class ProductPage extends BasePage {
     public void dumpPrice() {
         try (FileWriter writer = new FileWriter("productPrice.txt", false)) {
             String text = productPrice.getText();
-            writer.write(text);
+            String formattedPrice = text.substring(1);
+            writer.write(formattedPrice);
             writer.flush();
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -117,30 +112,16 @@ public class ProductPage extends BasePage {
         Thread.sleep(3000); //need for animation
     }
 
-    public void allMarks() {
-           try {
-               List<WebElement> sizeFieldList = driver.findElements(By.xpath("//select[@id='variantSelector']"));
+    public void selectFirstSize() {
+       WebElement element =  driver.findElement(By.xpath("//div[@class='product-intro__size-choose fsp-element']//div[@class!='product-intro__size-radio product-intro__size-radio_soldout']"));
+       element.click();
 
-            for (int i = 0; i < sizeFieldList.size(); i++) {
-                WebElement nextSizeField = driver.findElement(By.xpath("//select[@id='variantSelector' and contains(@id," + i + ")]"));
-                nextSizeField.click();
-                waitForVisibilityOf(sizeValues);
-                int clickAble = 3;
-                for (int j = 2; j < clickAble; j++) {
-                    try {
-                        waitElementToBeClickAble(driver.findElement(By.xpath("//select[@id='variantSelector' and contains(@id," + i + ")]//*[" + j + "]")));
-                        driver.findElement(By.xpath("//select[@id='variantSelector' and contains(@id," + i + ")]//*[" + j + "]")).click();
-                        nextSizeField.click();
+    }
 
-                    } catch (TimeoutException e) {
-                        clickAble++;
-                    }
-                }
-            }
-        } catch (ElementNotInteractableException e) {
-               return;
-           }
-
+    public void addToCart() throws InterruptedException {
+        waitForVisibilityOf(toCartButton);
+        toCartButton.click();
+        Thread.sleep(3000); //need for animation
     }
 
 }

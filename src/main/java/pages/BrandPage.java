@@ -23,7 +23,7 @@ public class BrandPage extends BasePage {
     WebElement sortDropdown;
     @FindBy(xpath = "//li[@aria-label='Price Low to High']")
     WebElement sortPriceLtHButton;
-    @FindBy(xpath = "//article")
+    @FindBy(xpath = "//section[@role='main']//section[@role='listitem'][1]//div[@class='product-card__bottom-wrapper']//a")
     WebElement firstProductOnPage;
     @FindBy(xpath = "//a[contains (., 'Women Clothing')]")
     WebElement womenClothing;
@@ -115,18 +115,13 @@ public class BrandPage extends BasePage {
 
     public void openRandomProductFromBrandPage() {
         waitForVisibilityOf(firstProductOnPage);
-        List<WebElement> countOnPage = driver.findElements(By.xpath("//article"));
-        int random = 1 + (int) (Math.random() * countOnPage.size());
-        WebElement randomProduct = driver.findElement(By.xpath("//article[" + random + "]"));
-        try {
+
+        int random = 1 + (int) (Math.random() * 10);
+        WebElement randomProduct = driver.findElement(By.xpath("//section[@role='main']//section[@role='listitem']["+random+"]//div[@class='product-card__bottom-wrapper']//a"));
             waitForVisibilityOf(randomProduct);
             randomProduct.click();
-        } catch (NoSuchElementException e) {
-            random = (int) (Math.random() * (countOnPage.size() + 1));
-            WebElement randomProduct1 = driver.findElement(By.xpath("//article[" + random + "]"));
-            waitForVisibilityOf(randomProduct1);
-            randomProduct1.click();
-        }
+
+
 
     }
 

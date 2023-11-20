@@ -43,18 +43,19 @@ Feature: Test ASOS
     Given Product "<page>" is opened
     When I select "<size>"
     # Any -> choose first available
-    And I Click add to Add to bag
+    And I Click add to Cart
+    And I open cart
     Then Product is placed to my cart
     Examples:
       | size | page                                                                                                                                    |
-      | W26    | https://www.asos.com/asos-design/asos-design-classic-rigid-jeans-in-mid-wash-blue/prd/202885414#colourWayId-202885415|
+      | 6.0  | https://us.shein.com/1pc-Fashionable-Stainless-Steel-C-shaped-Horseshoe-Barbell-Lip-Nose-Piercing-Unisex-Daily-Wear-p-20323682-cat-6208.html?src_identifier=fc%3DMen%20Fashion%60sc%3DMen%60tc%3D0%60oc%3D0%60ps%3Dtab11navbar11%60jc%3DitemPicking_100215777&src_module=topcat&src_tab_page_id=page_real_class1700500359154&mallCode=1&imgRatio=1-1|
       | Any  | Any                                                                                                                                     |
 
   Scenario Outline: Check discount prise in cart
     Given Sales product "<page>" opened
     When I select "<size>"
     # Any -> choose first available
-    And I Click add to Add to bag
+    And I Click add to Cart
     Then Price in cart equals to product sales price
     Examples:
       | size | page                                                                                                                  |

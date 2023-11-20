@@ -127,29 +127,20 @@ public class steps {
     public void iSelect(String size) throws InterruptedException {
         if (size == "Any") {
             productPage = new ProductPage(driver);
-            productPage.allMarks();
-            productPage.dumpName();
-            productPage.dumpPrice();
+            productPage.selectFirstSize();
         } else {
             productPage = new ProductPage(driver);
             productPage.selectSize(size);
-            productPage.dumpName();
-            productPage.dumpPrice();
         }
+        productPage.dumpName();
+        productPage.dumpPrice();
 
     }
 
-    @And("I Click add to Add to bag")
-    public void iClickAddToAddToBag() throws InterruptedException {
+    @And("I Click add to Cart")
+    public void iClickAddToCart() throws InterruptedException {
         productPage = new ProductPage(driver);
-        //productPage.addToBag(); go around blocker
-        productPage.addToWishList();
-        basePage = new BasePage(driver);
-        basePage.openWishList();
-        wishList = new WishList(driver);
-        wishList.addToCart();
-        basePage = new BasePage(driver);
-        basePage.openCart();
+        productPage.addToCart();
     }
 
     @Then("Product is placed to my cart")
@@ -164,7 +155,11 @@ public class steps {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("start-maximized");
         driver = WebDriverManager.chromedriver().capabilities(options).create();
+
         if (Objects.equals(url, "Any")) {
+            driver.get("https://www.shein.com/");
+            basePage = new BasePage(driver);
+            basePage.closeAdd();
             brandPage = new BrandPage(driver);
             brandPage.openCategory(url);
             brandPage.openRandomProductFromBrandPage();
@@ -224,7 +219,7 @@ public class steps {
             brandPage.openCategory("Any");
             brandPage.openRandomProductFromBrandPage();
             productPage = new ProductPage(driver);
-            productPage.allMarks();
+            productPage.selectFirstSize();
             productPage.addToWishList();
         }
         basePage = new BasePage(driver);
@@ -258,7 +253,7 @@ public class steps {
     public void productsInCart() throws InterruptedException {
         brandPage.openRandomProductFromBrandPage();
         productPage = new ProductPage(driver);
-        productPage.allMarks();
+        productPage.selectFirstSize();
         productPage.addToWishList();
         basePage = new BasePage(driver);
         basePage.openWishList();
@@ -332,7 +327,7 @@ public class steps {
         brandPage.openCategory("Any");
         brandPage.openRandomProductFromBrandPage();
         productPage = new ProductPage(driver);
-        productPage.allMarks();
+        productPage.selectFirstSize();
         productPage.addToWishList();
         productPage.openWishList();
         wishList = new WishList(driver);
@@ -355,6 +350,13 @@ public class steps {
     @And("I click on slip button")
     public void iClickOnSlipButton() {
         singIn.clickSkip();
+    }
+
+    @And("I open cart")
+    public void iOpenCart() {
+        basePage = new BasePage(driver);
+        basePage.openCart();
+
     }
 }
 

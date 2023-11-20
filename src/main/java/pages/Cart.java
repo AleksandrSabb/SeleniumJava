@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class Cart extends BasePage{
-    @FindBy(xpath = "//p[@class='bag-item-name']/a")
+    @FindBy(xpath = "//a[@class='gd-name']")
     WebElement productName;
     @FindBy(xpath = "//span[@class='bag-subtotal-price']")
     WebElement productPrice;

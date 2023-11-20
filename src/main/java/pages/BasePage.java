@@ -17,11 +17,11 @@ public class BasePage {
     WebElement signinButton;
     @FindBy(xpath = "//input[@type='search']")
     WebElement searchField;
-    @FindBy(xpath = "//div[@id='miniBagDropdown']")
+    @FindBy(xpath = "//i[@class='suiiconfont-critical sui_icon_nav_cart_24px']")
     WebElement cartButton;
     @FindBy(xpath = "//a[@data-testid='savedItemsIcon']")
     WebElement wishListButton;
-    @FindBy(xpath = "//a[@data-test-id='bag-link']")
+    @FindBy(xpath = "//div[@class='product-intro__add-btn fsp-element']")
     WebElement toCartButton;
     @FindBy(xpath = "//div[@class='bag-item-descriptions']")
     WebElement productFrame;
@@ -65,15 +65,8 @@ public class BasePage {
     }
 
     public void openCart() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        Actions actions = new Actions(driver);
-        actions.scrollByAmount(0, -500).build().perform();
-        wait.until(ExpectedConditions.elementToBeClickable(cartButton));
-        actions.moveToElement(cartButton).build().perform();
-        wait.until(ExpectedConditions.elementToBeClickable(toCartButton));
-        toCartButton.click();
-        wait.until(ExpectedConditions.visibilityOf(productFrame));
-        //driver.get("https://www.asos.com/bag?ctaref=mini+bag"); if cart is empty
+    waitForVisibilityOf(cartButton);
+    cartButton.click();
     }
 
     public void openWishList() {
@@ -95,4 +88,5 @@ public class BasePage {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
 }
