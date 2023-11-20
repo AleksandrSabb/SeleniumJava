@@ -3,31 +3,32 @@ Feature: Test ASOS
 
   Scenario Outline: Test login with valid creads
     Given Page is opened
-    When I navigate to profile icon
-    And I click on signIn link
+    When I click on signIn link
     And I enter valid email "<email>"
+    And I click on continue button
     And I enter valid password "<password>"
     And I click on signIn button
-    Then I see main page
+    And I click on slip button
+    Then I see user page
     Examples:
       | email                | password   |
       | mymailbox099@meta.ua | asd5329367 |
 
   Scenario: Search
     Given Page is opened
-    When I type text ("Adidas")in search field
+    When I type text ("Jeans")in search field
     And Press Enter
-    Then I see result of my request ("Adidas")
+    Then I see result of my request ("Jeans")
 
   Scenario Outline: Filter by colour
-    Given Brand "<page>" is opened
-    When I set "<colour>" dropdown
-    Then I see only products with "<colour>"
+    Given Category "<page>" is opened
+    When I set "<color>"
+    Then I see only products with "<color>"
     Examples:
     # For Any test may fail (with select white shown products with cream, blue->aqua, etc.) need to contact PM for investigate)
-      | colour | page                                                           |
-      | Blue   | https://www.asos.com/men/a-to-z-of-brands/adidas/cat/?cid=7113 |
-      | Any    | Any                                                            |
+      | color    | page   |
+      | Yellow   | Kids   |
+      | Any      | Any    |
 
   Scenario Outline: Filter by price
     Given Brand "<page>" is opened

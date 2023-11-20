@@ -7,9 +7,9 @@ import org.openqa.selenium.support.FindBy;
 
 public class SearchPage extends BasePage{
 
-    @FindBy(xpath = "//input[@type='search']")
+    @FindBy(xpath = "//input[@name='header-search']")
     WebElement searchField;
-    @FindBy(xpath = "//div[@id='search-term-banner']//*[2]")
+    @FindBy(xpath = "//h1[@class='top-info__title-name']")
     WebElement resultTitle;
 
     public SearchPage(WebDriver driver) {
@@ -23,10 +23,8 @@ public class SearchPage extends BasePage{
         searchField.sendKeys( Keys.ENTER);
     }
     public String getResultTitle(){
-        String result = resultTitle.getText();
-        int size = result.length();
-        result = result.substring(1,size-1).toLowerCase();
-        return result;
+        return resultTitle.getText();
+
     }
 
     public String getSearchItem(String text) {
