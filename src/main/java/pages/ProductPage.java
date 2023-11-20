@@ -13,19 +13,19 @@ import java.util.List;
 import java.util.Objects;
 
 public class ProductPage extends BasePage {
-    @FindBy(xpath = "//select[@data-id='sizeSelect']")
+    @FindBy(xpath = "//select[@id='variantSelector']")
     WebElement selectSizeDropdown;
-    @FindBy(xpath = "//select[@data-id='sizeSelect']//*")
+    @FindBy(xpath = "//select[@id='variantSelector']//*")
     WebElement sizeValues;
     @FindBy(xpath = "//button[@data-test-id='add-button']")
     WebElement addButton;
     @FindBy(xpath = "//h1[1]")
     WebElement productName;
-    @FindBy(xpath = "//span[@data-test-id='current-price']")
+    @FindBy(xpath = "//div/div/span[@data-testid='current-price']")
     WebElement productPrice;
     @FindBy(xpath = "//div[@data-test-id='data-test-id' ]")
     WebElement cartAddConfirm;
-    @FindBy(xpath = "//button[@aria-label='Save for later' and @class='PHcSE kFfQP']")
+    @FindBy(xpath = "//section[@id='core-product']//button[@data-testid='saveForLater']")
     WebElement addToWishListButton;
 
     public ProductPage(WebDriver driver) {
@@ -40,11 +40,11 @@ public class ProductPage extends BasePage {
             allMarks();
         } else {
 
-            List<WebElement> matches = driver.findElements(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]"));
+            List<WebElement> matches = driver.findElements(By.xpath("//select[@id='variantSelector']//*[contains (text(),'" + size + "')]"));
             for (int i = 0; i <matches.size() ; i++) {
                 if (Objects.equals(size, matches.get(i).getText().substring(0, size.length()))){
-                    waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]["+(i+1)+"]")));
-                    driver.findElement(By.xpath("//select[@data-id='sizeSelect']//*[contains (text(),'" + size + "')]["+(i+1)+"]")).click();
+                    waitElementToBeClickAble(driver.findElement(By.xpath("//select[@id='variantSelector']//*[contains (text(),'" + size + "')]["+(i+1)+"]")));
+                    driver.findElement(By.xpath("//select[@id='variantSelector']//*[contains (text(),'" + size + "')]["+(i+1)+"]")).click();
                     selectSizeDropdown.click();
                 }
             }
@@ -119,17 +119,17 @@ public class ProductPage extends BasePage {
 
     public void allMarks() {
            try {
-               List<WebElement> sizeFieldList = driver.findElements(By.xpath("//select[@data-id='sizeSelect']"));
+               List<WebElement> sizeFieldList = driver.findElements(By.xpath("//select[@id='variantSelector']"));
 
             for (int i = 0; i < sizeFieldList.size(); i++) {
-                WebElement nextSizeField = driver.findElement(By.xpath("//select[@data-id='sizeSelect' and contains(@id," + i + ")]"));
+                WebElement nextSizeField = driver.findElement(By.xpath("//select[@id='variantSelector' and contains(@id," + i + ")]"));
                 nextSizeField.click();
                 waitForVisibilityOf(sizeValues);
                 int clickAble = 3;
                 for (int j = 2; j < clickAble; j++) {
                     try {
-                        waitElementToBeClickAble(driver.findElement(By.xpath("//select[@data-id='sizeSelect' and contains(@id," + i + ")]//*[" + j + "]")));
-                        driver.findElement(By.xpath("//select[@data-id='sizeSelect' and contains(@id," + i + ")]//*[" + j + "]")).click();
+                        waitElementToBeClickAble(driver.findElement(By.xpath("//select[@id='variantSelector' and contains(@id," + i + ")]//*[" + j + "]")));
+                        driver.findElement(By.xpath("//select[@id='variantSelector' and contains(@id," + i + ")]//*[" + j + "]")).click();
                         nextSizeField.click();
 
                     } catch (TimeoutException e) {

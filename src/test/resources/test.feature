@@ -31,13 +31,13 @@ Feature: Test ASOS
       | Any      | Any    |
 
   Scenario Outline: Filter by price
-    Given Brand "<page>" is opened
+    Given Category "<page>" is opened
     When I select sort by price from low to high
     Then Prise of product is lower or equal to the next product
     Examples:
-      | page                                                           |
-      | https://www.asos.com/men/a-to-z-of-brands/adidas/cat/?cid=7113 |
-      | Any                                                            |
+      | page        |
+      | Men Fashion |
+      | Any         |
 
   Scenario Outline: Add to cart
     Given Product "<page>" is opened
@@ -47,7 +47,7 @@ Feature: Test ASOS
     Then Product is placed to my cart
     Examples:
       | size | page                                                                                                                                    |
-      | S    | https://www.asos.com/adidas-originals/adidas-originals-essentials-t-shirt-in-pink/prd/201534582?clr=pink&colourWayId=201534618&cid=7113 |
+      | W26    | https://www.asos.com/asos-design/asos-design-classic-rigid-jeans-in-mid-wash-blue/prd/202885414#colourWayId-202885415|
       | Any  | Any                                                                                                                                     |
 
   Scenario Outline: Check discount prise in cart

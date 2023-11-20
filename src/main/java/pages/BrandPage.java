@@ -2,11 +2,14 @@ package pages;
 
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 
@@ -16,11 +19,11 @@ public class BrandPage extends BasePage {
     WebElement colourDropDown;
     @FindBy(xpath = "//div[@class = 'collapsibleMenu_oBN6c collapsibleMenu__open_EWBhZ']")
     WebElement colorSelectPane;
-    @FindBy(xpath = "//li[@data-auto-id='sort']")
+    @FindBy(xpath = "//div[@class='sui-input']")
     WebElement sortDropdown;
-    @FindBy(xpath = "//li[@id='plp_web_sort_price_low_to_high']")
+    @FindBy(xpath = "//li[@aria-label='Price Low to High']")
     WebElement sortPriceLtHButton;
-    @FindBy(xpath = "//article[@data-auto-id]")
+    @FindBy(xpath = "//article")
     WebElement firstProductOnPage;
     @FindBy(xpath = "//a[contains (., 'Women Clothing')]")
     WebElement womenClothing;
@@ -50,7 +53,7 @@ public class BrandPage extends BasePage {
         boolean result = true;
         if (result)
             for (int i = 1; i < 2; i++) {  //return 5 after
-                WebElement element = driver.findElement(By.xpath("//section[@role='main']//section[@role='listitem']["+i+"]"));
+                WebElement element = driver.findElement(By.xpath("//section[@role='main']//section[@role='listitem']["+i+"]//div[@class='product-card__bottom-wrapper']//a"));
                 waitForVisibilityOf(element);
                 Thread.sleep(2000);
                 element.click();
@@ -68,13 +71,16 @@ public class BrandPage extends BasePage {
 
     public void sortByPriceLtH() throws InterruptedException {
         waitElementToBeClickAble(sortDropdown);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(sortDropdown).build().perform();
         sortDropdown.click();
         waitForVisibilityOf(sortPriceLtHButton);
         sortPriceLtHButton.click();
 
         Thread.sleep(3000); //need for wait loading
 
-        waitForVisibilityOf(driver.findElement(By.xpath("//article")));
+        waitForVisibilityOf(driver.findElement(By.xpath("//section[@role='main']//section[@role='listitem']")));
     }
 
     public boolean sortByPriceLtHcheck() {
@@ -85,21 +91,17 @@ public class BrandPage extends BasePage {
                 String valueOne;
                 String valueTwo;
                 int next = i + 1;
-                try {
-                    valueOne = driver.findElement(By.xpath("//article[" + i + "]//span[2]/span")).getText();
 
-                } catch (NoSuchElementException e) {
-                    valueOne = driver.findElement(By.xpath("//article[" + i + "]//span[1]/span")).getText();
-                }
-                try {
-                    valueTwo = driver.findElement(By.xpath("//article[" + i + "]//span[2]/span")).getText();
-                } catch (NoSuchElementException e) {
-                    valueTwo = driver.findElement(By.xpath("//article[" + i + "]//span[1]/span")).getText();
-                }
+                    valueOne = driver.findElement(By.xpath("//section[@role='listitem']["+i+"]//span[@role='contentinfo']/p/span")).getText();
+
+                    valueTwo = driver.findElement(By.xpath("//section[@role='listitem']["+next+"]//span[@role='contentinfo']/p/span")).getText();
+
                 valueOne = valueOne.substring(1).replace(".", "");
                 valueTwo = valueTwo.substring(1).replace(".", "");
                 result = (Integer.parseInt(valueOne) <= Integer.parseInt(valueTwo));
+                System.out.println(valueOne + "     "+valueTwo);
                 } else result = false;
+
 
         }
         return result;
@@ -113,15 +115,15 @@ public class BrandPage extends BasePage {
 
     public void openRandomProductFromBrandPage() {
         waitForVisibilityOf(firstProductOnPage);
-        List<WebElement> countOnPage = driver.findElements(By.xpath("//article[@data-auto-id='productTile']"));
+        List<WebElement> countOnPage = driver.findElements(By.xpath("//article"));
         int random = 1 + (int) (Math.random() * countOnPage.size());
-        WebElement randomProduct = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + random + "]"));
+        WebElement randomProduct = driver.findElement(By.xpath("//article[" + random + "]"));
         try {
             waitForVisibilityOf(randomProduct);
             randomProduct.click();
         } catch (NoSuchElementException e) {
             random = (int) (Math.random() * (countOnPage.size() + 1));
-            WebElement randomProduct1 = driver.findElement(By.xpath("//article[@data-auto-id='productTile'][" + random + "]"));
+            WebElement randomProduct1 = driver.findElement(By.xpath("//article[" + random + "]"));
             waitForVisibilityOf(randomProduct1);
             randomProduct1.click();
         }
@@ -170,7 +172,7 @@ public class BrandPage extends BasePage {
                 element.click();
                 break;
         }
-        Thread.sleep(5000);
+        Thread.sleep(4000);
     }
     public void dumpColourSelect(WebElement element){
         try (FileWriter writer = new FileWriter("randomColour.txt", false)) {
